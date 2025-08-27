@@ -1,68 +1,119 @@
+@import url('https://fonts.googleapis.com/css2?family=Mozilla+Headline:wght@200..700&display=swap');
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+    --primary-fonts: "Mozilla Headline", sans-serif;
+    --primary-color: #09684f;
+    --secondary-color: #dc3545;
+    --variant-color: #0F172A;
+    --primary-bg-color: #0F172A;
+}
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+}
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+html,
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+ul {
+    padding: 0px;
+    margin: 0px;
+    list-style-type: none;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+    padding: 0px;
+    margin: 0px;
+    text-decoration: none !important;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
+p {
+    padding: 0px;
+    margin: 0px;
 }
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+span {
+    padding: 0;
+    margin: 0;
 }
 
 button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+    border: none;
+    background-color: transparent;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
-  }
-  a:hover {
-    color: #747bff;
-  }
-  button {
-    background-color: #f9f9f9;
-  }
+.form_heading {
+    font-size: 22px;
+    font-weight: 400;
+    text-align: center;
+    font-family: var(--primary-fonts);
+    letter-spacing: 1px;
+    text-transform: capitalize;
+}
+
+.form-select,
+.form-label,
+.form-control,
+.form-check-label {
+    font-size: 16px;
+    font-weight: 400;
+    font-family: var(--primary-fonts);
+    letter-spacing: 1px;
+}
+
+.form-select:focus,
+.form-control:focus {
+    box-shadow: none !important;
+}
+
+.form-control::placeholder {
+    font-size: 14px;
+    font-weight: 400;
+    font-family: var(--primary-fonts);
+    letter-spacing: 1px;
+}
+
+
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+
+.dropdown-toggle::after {
+    display: none;
+}
+
+.dashboard_main_content {
+    margin-left: 260px;
+    overflow-x: hidden;
+}
+
+
+@media screen and (max-width:768px) {
+    .dashboard_main_content {
+        margin-left: 0px;
+    }
 }
