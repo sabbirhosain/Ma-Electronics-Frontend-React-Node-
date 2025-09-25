@@ -15,7 +15,7 @@ const Header = () => {
           <button className="offcanvas_close_btn btn btn-dark d-flex align-items-center rounded-0" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"><FaBars className="offcanvas_bar_icon" /></button>
           {/*====>> Offcanvas bar end <<====*/}
 
-          <h5 className="company_brand d-none d-md-block">Admin</h5>
+          <h5 className="company_brand d-none d-md-block">Ma Electronics</h5>
           <div className="d-flex align-items-center gap-3">
             <div className="btn-group">
               <button type="button" className="btn btn-outline-dark rounded-0 dropdown-toggle d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" ><FaUserCircle /></button>

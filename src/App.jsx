@@ -7,19 +7,23 @@ import Categories_Page from "./Pages/Categories_Page"
 import Purchase_Page from "./Pages/Purchase_Page"
 import Products_Page from "./Pages/Products_Page"
 import Customer_Page from "./Pages/Customer_Page"
-import Customer_Payment_Pages from "./Pages/Customer_Payment_Pages"
 import Invoice_Page from "./Pages/Invoice_Page"
 import Expense_Page from "./Pages/Expense_Page"
 import Settings_Page from "./Pages/Settings_Page"
-import './App.css'
+import Customer_Payment_Pages from "./Pages/Customer_Payment_Pages"
 import Create_Categories from "./Components/Categories/Create_Categories"
 import Update_Categories from "./Components/Categories/Update_Categories"
 import Create_Product from "./Components/Products/Create_Product"
 import Update_Product from "./Components/Products/Update_Product"
 import Create_Purchase from "./Components/Purchase/Create_Purchase"
 import Update_Purchase from "./Components/Purchase/Update_Purchase"
+import axios from "axios"
+import './App.css'
 
 const App = () => {
+  // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+  axios.defaults.headers.post['Content-Type'] = 'application/json';
+
   return (
     <>
       <ToastContainer position="top-right" autoClose={5000} />

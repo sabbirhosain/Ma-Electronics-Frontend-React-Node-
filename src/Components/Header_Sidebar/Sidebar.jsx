@@ -14,7 +14,7 @@ const Sidebar = () => {
         <section className="sidebar_section">
             <div className="offcanvas offcanvas-start offcanvas_sidebar" tabIndex={-1} id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
                 <div className="offcanvas-header">
-                    <NavLink to='/' className='dashboard_logo_text'>Ma Electronics</NavLink>
+                    <NavLink to='/' className='dashboard_logo_text'>Admin Dashboard</NavLink>
                     <button type="button" className="btn-close offcanvas_close_btn" data-bs-dismiss="offcanvas" aria-label="Close"></button>
                 </div>
                 <div className="offcanvas-body">

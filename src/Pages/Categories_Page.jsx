@@ -1,9 +1,11 @@
 import Table_Categories from '../Components/Categories/Table_Categories'
+import { useCategories_Context } from '../Context/Categories_Context'
 import { MdFormatListBulletedAdd } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 import Layout from '../Layout/Layout'
 
 const Categories_Page = () => {
+  const { categories, updateCategoriesState } = useCategories_Context();
   return (
     <Layout>
       <section className=''>
@@ -16,7 +18,7 @@ const Categories_Page = () => {
           <div className="col-md-9"></div>
           <div className="col-md-3">
             <div className='w-100'>
-              <input type="search" className="form-control rounded-0" placeholder="Search Hear..." />
+              <input type="search" value={categories.search} onChange={(event) => updateCategoriesState({ search: event.target.value })} className="form-control rounded-0" placeholder="Search Hear..." />
             </div>
           </div>
         </div>
