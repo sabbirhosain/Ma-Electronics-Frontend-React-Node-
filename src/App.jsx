@@ -19,6 +19,9 @@ import Create_Purchase from "./Components/Purchase/Create_Purchase"
 import Update_Purchase from "./Components/Purchase/Update_Purchase"
 import axios from "axios"
 import './App.css'
+import Unit_Type_page from "./Pages/Unit_Type_page"
+import Create_Unit_Types from "./Components/Unit_Types/Create_Unit_Types"
+import Update_Unit_Types from "./Components/Unit_Types/Update_Unit_Types"
 
 const App = () => {
   // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -29,6 +32,9 @@ const App = () => {
       <ToastContainer position="top-right" autoClose={5000} />
       <Routes>
         <Route path="/" element={<Dashboard_Page />} />
+        <Route path="/unittype-table" element={<Unit_Type_page />} />
+        <Route path="/unittype-create" element={<Create_Unit_Types />} />
+        <Route path="/unittype-update/:id" element={<Update_Unit_Types />} />
         <Route path="/categories-table" element={<Categories_Page />} />
         <Route path="/categories-create" element={<Create_Categories />} />
         <Route path="/categories-update/:id" element={<Update_Categories />} />

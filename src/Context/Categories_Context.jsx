@@ -11,7 +11,9 @@ const Categories_Context = ({ children }) => {
     const fetchCategoriesData = async (page) => {
         try {
             updateCategoriesState({ isLoading: true, error_message: null });
-            const response = await axios.get(show_categories, { params: { search: categories.search, page: page } })
+            const response = await axios.get(show_categories, {
+                params: { search: categories.search, page: page }
+            })
 
             if (response && response.data) {
                 const data = response.data.payload || [];
@@ -22,29 +24,22 @@ const Categories_Context = ({ children }) => {
             }
 
         } catch (error) {
-            if (error.response) {
-                updateCategoriesState({ error_message: error.response.data.message || 'Internal Server Error' })
-            } else if (error.request) {
-                updateCategoriesState({ error_message: 'No response received from server' })
-            } else {
-                updateCategoriesState({ error_message: error.message || 'Request setup error' })
-            }
-            throw error;
+            console.log(error);
         } finally {
             updateCategoriesState({ isLoading: false });
         }
     }
 
     // ===== for react select dropdown ==========
-    const options_select = (select) => { updateCategoriesState({ options_value: select }) };
-    const options_search = (search) => { updateCategoriesState({ search: search }) };
+    const categories_options_select = (select) => { updateCategoriesState({ options_value: select }) };
+    const categories_options_search = (search) => { updateCategoriesState({ search: search }) };
 
 
 
 
 
     return (
-        <Categories_Context_Provider.Provider value={{ categories, updateCategoriesState, fetchCategoriesData, options_select, options_search, }}>
+        <Categories_Context_Provider.Provider value={{ categories, updateCategoriesState, fetchCategoriesData, categories_options_select, categories_options_search }}>
             {children}
         </Categories_Context_Provider.Provider>
     )

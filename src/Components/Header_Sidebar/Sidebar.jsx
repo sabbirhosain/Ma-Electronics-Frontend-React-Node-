@@ -2,6 +2,7 @@ import { MdAttachMoney, MdDashboardCustomize, MdOutlineCategory } from "react-ic
 import { HiMiniUsers } from "react-icons/hi2";
 import { FaHandHoldingUsd } from "react-icons/fa";
 import { CiSettings } from "react-icons/ci";
+import { BiUnite } from "react-icons/bi";
 import { IoIosArrowDown, IoIosStarHalf } from "react-icons/io";
 import { VscArrowSmallRight } from "react-icons/vsc";
 import { NavLink, useLocation } from 'react-router-dom'
@@ -23,6 +24,12 @@ const Sidebar = () => {
                         <li className="dropdown_list">
                             <NavLink to='/' className="dropdown_btn">
                                 <span className="dropdown_list_name"><MdDashboardCustomize className="dropdown_list_icon" />Dashboard</span>
+                            </NavLink>
+                        </li>
+
+                        <li className="dropdown_list">
+                            <NavLink to='/unittype-table' className="dropdown_btn">
+                                <span className="dropdown_list_name"><BiUnite className="dropdown_list_icon" />Unit Type</span>
                             </NavLink>
                         </li>
 
