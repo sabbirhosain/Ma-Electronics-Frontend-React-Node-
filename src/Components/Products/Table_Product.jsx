@@ -27,12 +27,8 @@ const Table_Product = () => {
       selector: row => row.categories_name
     },
     {
-      name: "Unit Name",
-      selector: row => row.unit_type_name
-    },
-    {
-      name: "Quentity Stock",
-      selector: row => row.quentity_stock
+      name: "Quentity",
+      selector: row => row.quentity_stock + ' - ' + row.unit_type_name
     },
     {
       name: "Status",
