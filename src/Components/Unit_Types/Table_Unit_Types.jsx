@@ -20,7 +20,7 @@ const Table_Unit_Types = () => {
       selector: row => row.unit_name
     },
     {
-      name: "Items Count",
+      name: "Counts",
       selector: row => row.items_count
     },
     {

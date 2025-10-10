@@ -21,7 +21,7 @@ const Table_Categories = () => {
       selector: row => row.categories_name
     },
     {
-      name: "Items Count",
+      name: "Counts",
       selector: row => row.items_count
     },
     {
