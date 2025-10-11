@@ -6,6 +6,7 @@ import './index.css'
 import Categories_Context from './Context/Categories_Context.jsx'
 import UnitType_Context from './Context/UnitType_Context.jsx'
 import Product_Context from './Context/Product_Context.jsx'
+import Purchase_Context from './Context/Purchase_Context.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -13,7 +14,9 @@ createRoot(document.getElementById('root')).render(
       <UnitType_Context>
         <Categories_Context>
           <Product_Context>
-            <App />
+            <Purchase_Context>
+              <App />
+            </Purchase_Context>
           </Product_Context>
         </Categories_Context>
       </UnitType_Context>

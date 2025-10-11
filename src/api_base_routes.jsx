@@ -15,3 +15,9 @@ export const show_products = import.meta.env.VITE_API_URL + "/api/v1/items/produ
 export const single_products = import.meta.env.VITE_API_URL + "/api/v1/items/product/";
 export const update_products = import.meta.env.VITE_API_URL + "/api/v1/items/product/";
 export const delete_products = import.meta.env.VITE_API_URL + "/api/v1/items/product/";
+
+export const create_purchase = import.meta.env.VITE_API_URL + "/api/v1/items/purchase";
+export const show_purchase = import.meta.env.VITE_API_URL + "/api/v1/items/purchase";
+export const single_purchase = import.meta.env.VITE_API_URL + "/api/v1/items/purchase/";
+export const update_purchase = import.meta.env.VITE_API_URL + "/api/v1/items/purchase/";
+export const delete_purchase = import.meta.env.VITE_API_URL + "/api/v1/items/purchase/";
