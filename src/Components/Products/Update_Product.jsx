@@ -20,7 +20,7 @@ const Update_Product = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
-  const [products, setProducts] = useState({ item_name: "", description: "", status: "" });
+  const [products, setProducts] = useState({ item_name: "", description: "", quentity_stock: "", status: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -35,7 +35,7 @@ const Update_Product = () => {
         const response = await axios.get(`${single_products}${id}`);
         if (response && response.data) {
           const result = response.data.payload;
-          setProducts({ item_name: result.item_name, description: result.description, status: result.status });
+          setProducts({ item_name: result.item_name, description: result.description, quentity_stock: result.quentity_stock, status: result.status });
           updateCategoriesState({ options_value: { value: result.categories_id, label: result.categories_name } });
           updateUnitTypesState({ options_value: { value: result.unit_type_id, label: result.unit_type_name } });
         }
@@ -61,7 +61,8 @@ const Update_Product = () => {
         item_name: products.item_name,
         categories_id: categories.options_value?.value,
         unit_type_id: unit_types.options_value?.value,
-        description: products.description
+        description: products.description,
+        status: products.status
       });
 
       if (response && response.data && response.data.success) {
@@ -92,9 +93,17 @@ const Update_Product = () => {
               <h4 className='form_heading py-4'>Update Product</h4>
               <div className="row border-top border-warning pt-4">
 
-                <div className="col-md-12 mb-3">
+                <div className="col-md-6 mb-3">
                   <label className='form-label'>Item Name</label>
                   <input type="text" name="item_name" value={products.item_name || ''} onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className='form-label'>Status</label>
+                  <select name="status" value={products.status || ''} onChange={handleChange} className="form-select rounded-0" disabled={loading || Number(products.quentity_stock) === 0}>
+                    <option value='available'>Available</option>
+                    <option value='unavailable'>Unavailable</option>
+                  </select>
                 </div>
 
                 <div className="col-md-6 mb-3">

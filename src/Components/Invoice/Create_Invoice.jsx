@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../../Layout/Layout'
 
 const Create_Invoice = () => {
   return (
-    <div>Create_Invoice</div>
+    <Layout>Create_Invoice</Layout>
   )
 }
 

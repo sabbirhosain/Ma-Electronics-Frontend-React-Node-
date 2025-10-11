@@ -41,7 +41,7 @@ const Table_Purchase = () => {
     {
       name: "Action",
       cell: row => <div className="d-flex align-items-center gap-2">
-        <Link to={`/purchase/view/${row._id}`} className="btn btn-outline-primary rounded-0 btn-sm"><BsEyeFill /></Link>
+        <Link to={`#`} className="btn btn-outline-primary rounded-0 btn-sm"><BsEyeFill /></Link>
         <Link to={`/purchase-update/${row._id}`} className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
         <button type="button" onClick={() => (row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
       </div>,
