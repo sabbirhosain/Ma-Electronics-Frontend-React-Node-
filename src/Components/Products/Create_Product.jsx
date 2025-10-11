@@ -10,8 +10,8 @@ import axios from 'axios'
 
 const Create_Product = () => {
   const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
-  const { categories, fetchCategoriesData, categories_options_select, categories_options_search } = useCategories_Context()
-  const { unit_types, fetchUnitTypesData, units_options_select, units_options_search } = useUnitType_Context()
+  const { categories, updateCategoriesState, fetchCategoriesData, categories_options_select, categories_options_search } = useCategories_Context()
+  const { unit_types, updateUnitTypesState, fetchUnitTypesData, units_options_select, units_options_search } = useUnitType_Context()
   useEffect(() => { fetchCategoriesData(1) }, [categories.search]);
   useEffect(() => { fetchUnitTypesData(1) }, [unit_types.search]);
 
@@ -43,6 +43,8 @@ const Create_Product = () => {
       if (response && response.data && response.data.success) {
         navigate("/product-table");
         toast.success(response.data.message || "Create Success.");
+        updateCategoriesState({ options_value: null });
+        updateUnitTypesState({ options_value: null });
       } else {
         alert(response.data.message || "Field Error");
       }
@@ -111,7 +113,7 @@ const Create_Product = () => {
                   <Link to='/product-table' className='btn btn-dark rounded-0 w-100 custom_btn'>Cancel</Link>
                 </div>
                 <div className="col-md-6 mt-3">
-                  <button type="submit" className='btn btn-dark rounded-0 w-100 custom_btn'>Create</button>
+                  <button type="submit" className='btn btn-dark rounded-0 w-100 custom_btn'>{loading ? "Please Wait" : "Create"}</button>
                 </div>
               </div>
 

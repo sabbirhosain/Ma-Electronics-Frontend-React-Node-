@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { BiEditAlt, BiTrash } from 'react-icons/bi';
 import { useEffect } from 'react';
 import DataTable from 'react-data-table-component';
-import { useProduct_Context } from '../../Context/Product_Context';
 import { BsEyeFill } from 'react-icons/bs';
+import { useProduct_Context } from '../../Context/Product_Context';
 import { useCategories_Context } from '../../Context/Categories_Context';
 
 const Table_Product = () => {
