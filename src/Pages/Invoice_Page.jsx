@@ -17,27 +17,17 @@ const Invoice_Page = () => {
 
                 <div className="row justify-content-end bg-light shadow-sm p-3">
                     <div className="col-md-12"></div>
-                    <div className="col-md-3 mb-2">
+                    <div className="col-md-3">
                         <div className='w-100'>
                             <input type="date" onChange={(event) => updateInvoiceState({ from_date: event.target.value })} className="form-control rounded-0" />
                         </div>
                     </div>
-                    <div className="col-md-3 mb-2">
+                    <div className="col-md-3">
                         <div className='w-100'>
                             <input type="date" onChange={(event) => updateInvoiceState({ to_date: event.target.value })} className="form-control rounded-0" />
                         </div>
                     </div>
-                    <div className="col-md-3 mb-2">
-                        <div className='w-100'>
-                            <select onChange={(event) => updateInvoiceState({ payment_type: event.target.value })} className="form-select rounded-0">
-                                <option value=''>Payment Types</option>
-                                <option value='full'>Full</option>
-                                <option value='partial'>Partial</option>
-                                <option value='credit'>Credit</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div className="col-md-3 mb-2">
+                    <div className="col-md-3">
                         <div className='w-100'>
                             <select onChange={(event) => updateInvoiceState({ status: event.target.value })} className="form-select rounded-0">
                                 <option value=''>Select Status</option>

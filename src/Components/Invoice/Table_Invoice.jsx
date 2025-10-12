@@ -7,7 +7,7 @@ import { useInvoice_Context } from '../../Context/Invoice_Context'
 
 const Table_Invoice = () => {
   const { invoice, fetchInvoiceData } = useInvoice_Context()
-  useEffect(() => { fetchInvoiceData(1) }, [invoice.search, invoice.from_date, invoice.to_date, invoice.payment_type, invoice.status]);
+  useEffect(() => { fetchInvoiceData(1) }, [invoice.search, invoice.from_date, invoice.to_date, invoice.status]);
   const onPageChange = (page) => { fetchInvoiceData(page) };
 
   const columns = [

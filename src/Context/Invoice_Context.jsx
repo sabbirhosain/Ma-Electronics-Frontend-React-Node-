@@ -5,7 +5,7 @@ import { show_invoice } from "../api_base_routes";
 const Invoice_Context_Provider = createContext();
 const Invoice_Context = ({ children }) => {
 
-    const [invoice, setInvoice] = useState({ isLoading: false, data: [], pagination: null, search: '', from_date: '', to_date: '', status: '', payment_type: '', error_message: null, options: [], options_value: null })
+    const [invoice, setInvoice] = useState({ isLoading: false, data: [], pagination: null, search: '', from_date: '', to_date: '', status: '', error_message: null, options: [], options_value: null })
     const updateInvoiceState = (newState) => { setInvoice(prev => ({ ...prev, ...newState })) };
 
     const fetchInvoiceData = async (page) => {
@@ -16,7 +16,6 @@ const Invoice_Context = ({ children }) => {
                     search: invoice.search,
                     from_date: invoice.from_date,
                     to_date: invoice.to_date,
-                    payment_type: invoice.payment_type,
                     status: invoice.status,
                     page: page
                 }
