@@ -28,7 +28,7 @@ const Table_Purchase = () => {
     },
     {
       name: "Quentity",
-      selector: row => row.quentity
+      selector: row => row.quentity + ' - ' + row.unit_type
     },
     {
       name: "Received",

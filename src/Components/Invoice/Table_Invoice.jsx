@@ -29,16 +29,16 @@ const Table_Invoice = () => {
       selector: row => row.customer_phone
     },
     {
-      name: "Total Price",
-      selector: row => row.subtotal
+      name: "Grand Total",
+      selector: row => row.grand_total + ' ' + row.currency_type
     },
     {
-      name: "Total Due",
-      selector: row => row.total_due
+      name: "Advance Pay",
+      selector: row => row.advance_pay + ' ' + row.currency_type
     },
     {
-      name: "Payment Type",
-      selector: row => row.payment_type
+      name: "Current Due",
+      selector: row => row.current_due + ' ' + row.currency_type
     },
     {
       name: "Status",

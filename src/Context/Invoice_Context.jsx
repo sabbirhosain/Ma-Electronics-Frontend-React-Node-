@@ -26,7 +26,7 @@ const Invoice_Context = ({ children }) => {
                 const data = response.data.payload || [];
                 updateInvoiceState({
                     data: data, pagination: response.data.pagination || null,
-                    options: data.map(item => ({ value: item._id, label: item.item_name })),
+                    options: data.map(invoice => ({ value: invoice._id, label: invoice.customer_name + ' - ' + invoice.customer_phone })),
                 });
             }
 
