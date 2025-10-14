@@ -44,7 +44,7 @@ const Invoice_Context = ({ children }) => {
 
 
     return (
-        <Invoice_Context_Provider.Provider value={{ invoice, updateInvoiceState, fetchInvoiceData }}>
+        <Invoice_Context_Provider.Provider value={{ invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search }}>
             {children}
         </Invoice_Context_Provider.Provider>
     )

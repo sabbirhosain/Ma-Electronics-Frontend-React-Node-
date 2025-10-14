@@ -33,10 +33,6 @@ const Table_Invoice = () => {
       selector: row => row.grand_total + ' ' + row.currency_type
     },
     {
-      name: "Advance Pay",
-      selector: row => row.advance_pay + ' ' + row.currency_type
-    },
-    {
       name: "Current Due",
       selector: row => row.current_due + ' ' + row.currency_type
     },

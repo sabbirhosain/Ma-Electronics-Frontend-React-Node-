@@ -65,7 +65,7 @@ const Create_Product = () => {
               <div className="row border-top border-warning pt-4">
 
                 <div className="col-md-12 mb-3">
-                  <label className='form-label'>Item Name</label>
+                  <label className='form-label'>Product Name</label>
                   <input type="text" name="item_name" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
                 </div>
 
@@ -93,7 +93,7 @@ const Create_Product = () => {
                     onChange={units_options_select}
                     onInputChange={units_options_search}
                     isLoading={unit_types.isLoading}
-                    placeholder={unit_types.isLoading ? "Loading..." : "Select Categries"}
+                    placeholder={unit_types.isLoading ? "Loading..." : "Select Units"}
                     isClearable={true}
                     styles={customStyles}
                     maxMenuHeight={300}

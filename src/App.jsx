@@ -22,6 +22,7 @@ import './App.css'
 import Unit_Type_page from "./Pages/Unit_Type_page"
 import Create_Unit_Types from "./Components/Unit_Types/Create_Unit_Types"
 import Update_Unit_Types from "./Components/Unit_Types/Update_Unit_Types"
+import Create_Invoice from "./Components/Invoice/Create_Invoice"
 
 const App = () => {
   // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -46,6 +47,7 @@ const App = () => {
         <Route path="/purchase-update/:id" element={<Update_Purchase />} />
         <Route path="/customer-table" element={<Customer_Page />} />
         <Route path="/invoice-table" element={<Invoice_Page />} />
+        <Route path="/invoice-create" element={<Create_Invoice />} />
         <Route path="/customer-payment-table" element={<Customer_Payment_Pages />} />
         <Route path="/expense-table" element={<Expense_Page />} />
         <Route path="/profile-settings" element={<Settings_Page />} />
