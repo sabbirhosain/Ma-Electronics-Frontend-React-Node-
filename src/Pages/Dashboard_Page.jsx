@@ -5,7 +5,7 @@ const Dashboard_Page = () => {
   return (
     <Layout>
       <section className='dashboard_section'>
-        <div className="container">
+        <div className="container-fluid">
           <div className="row mt-4">
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>

@@ -6,7 +6,7 @@ import { useCategories_Context } from '../../Context/Categories_Context';
 
 const Table_Categories = () => {
 
-  const { categories, fetchCategoriesData } = useCategories_Context()
+  const { categories, fetchCategoriesData, deleteCategory } = useCategories_Context()
   useEffect(() => { fetchCategoriesData(1) }, [categories.search]);
   const onPageChange = (page) => { fetchCategoriesData(page) }; // data table page change
 
@@ -28,7 +28,7 @@ const Table_Categories = () => {
       name: "Action",
       cell: row => <div className="d-flex align-items-center gap-2">
         <Link to={`/categories-update/${row._id}`} className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
-        {row.items_count === 0 ? (<button type="button" onClick={() => (row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>) : (<button type="button" className="btn btn-dark rounded-0 btn-sm" disabled><BiTrash /></button>)}
+        {row.items_count === 0 ? (<button type="button" onClick={() => deleteCategory(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>) : (<button type="button" className="btn btn-dark rounded-0 btn-sm" disabled><BiTrash /></button>)}
       </div>,
       width: "150px"
     }

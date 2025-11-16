@@ -1,7 +1,8 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
-import { show_products } from "../api_base_routes";
+import { delete_products, show_products } from "../api_base_routes";
 import { useCategories_Context } from "./Categories_Context";
+import { toast } from "react-toastify";
 
 const Product_Context_Provider = createContext();
 const Product_Context = ({ children }) => {
@@ -41,12 +42,32 @@ const Product_Context = ({ children }) => {
   const products_options_select = (select) => { updateProductState({ options_value: select }) };
   const products_options_search = (search) => { updateProductState({ search: search }) };
 
+  const deleteProduct = async (id) => {
+    try {
+      const confirm_delete = window.confirm('Are You Sure ? You Want to Delete!');
+      if (!confirm_delete) return;
 
+      updateProductState({ isLoading: true });
+      const response = await axios.delete(`${delete_products}${id}`);
+      if (response && response.data && response.data.success) {
+        fetchProductsData(1)
+        toast.success(response.data.message || 'Delete Success.')
+      } else {
+        alert(response.data.message || 'Field Error')
+      }
+
+    } catch (error) {
+      console.log('Internal Server Error', error);
+
+    } finally {
+      updateProductState({ isLoading: false });
+    }
+  }
 
 
 
   return (
-    <Product_Context_Provider.Provider value={{ products, updateProductState, fetchProductsData, products_options_select, products_options_search }}>
+    <Product_Context_Provider.Provider value={{ products, updateProductState, fetchProductsData, products_options_select, products_options_search, deleteProduct }}>
       {children}
     </Product_Context_Provider.Provider>
   );

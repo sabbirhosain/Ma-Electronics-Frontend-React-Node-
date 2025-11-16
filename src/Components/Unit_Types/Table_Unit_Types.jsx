@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 import { Link } from 'react-router-dom';
 
 const Table_Unit_Types = () => {
-  const { unit_types, fetchUnitTypesData } = useUnitType_Context()
+  const { unit_types, fetchUnitTypesData, deleteUnitType } = useUnitType_Context()
   useEffect(() => { fetchUnitTypesData(1) }, [unit_types.search]);
   const onPageChange = (page) => { fetchUnitTypesData(page) };
 
@@ -27,7 +27,7 @@ const Table_Unit_Types = () => {
       name: "Action",
       cell: row => <div className="d-flex align-items-center gap-2">
         <Link to={`/unittype-update/${row._id}`} className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
-        {row.items_count === 0 ? (<button type="button" onClick={() => (row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>) : (<button type="button" className="btn btn-dark rounded-0 btn-sm" disabled><BiTrash /></button>)}
+        {row.items_count === 0 ? (<button type="button" onClick={() => deleteUnitType(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>) : (<button type="button" className="btn btn-dark rounded-0 btn-sm" disabled><BiTrash /></button>)}
       </div>,
       width: "150px"
     }

@@ -1,7 +1,8 @@
 import { createContext, useContext, useState } from "react";
 import { useProduct_Context } from "./Product_Context";
-import { show_purchase } from "../api_base_routes";
+import { delete_purchase, show_purchase } from "../api_base_routes";
 import axios from "axios";
+import { toast } from "react-toastify";
 
 const Purchase_Context_Provider = createContext();
 const Purchase_Context = ({ children }) => {
@@ -35,10 +36,30 @@ const Purchase_Context = ({ children }) => {
         }
     }
 
+    const deletePurchase = async (id) => {
+        try {
+            const confirm_delete = window.confirm('Are You Sure ? You Want to Delete!');
+            if (!confirm_delete) return;
 
+            updatePurchaseState({ isLoading: true });
+            const response = await axios.delete(`${delete_purchase}${id}`);
+            if (response && response.data && response.data.success) {
+                fetchPurchaseData(1)
+                toast.success(response.data.message || 'Delete Success.')
+            } else {
+                alert(response.data.message || 'Field Error')
+            }
+
+        } catch (error) {
+            console.log('Internal Server Error', error);
+
+        } finally {
+            updatePurchaseState({ isLoading: false });
+        }
+    }
 
     return (
-        <Purchase_Context_Provider.Provider value={{ purchase, updatePurchaseState, fetchPurchaseData }}>
+        <Purchase_Context_Provider.Provider value={{ purchase, updatePurchaseState, fetchPurchaseData, deletePurchase }}>
             {children}
         </Purchase_Context_Provider.Provider>
     )

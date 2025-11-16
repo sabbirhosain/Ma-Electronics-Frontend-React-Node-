@@ -8,7 +8,7 @@ import { useProduct_Context } from "../../Context/Product_Context";
 
 const Table_Purchase = () => {
   const { products } = useProduct_Context()
-  const { purchase, fetchPurchaseData } = usePurchase_Context()
+  const { purchase, fetchPurchaseData, deletePurchase } = usePurchase_Context()
   useEffect(() => { fetchPurchaseData(1) }, [purchase.search, purchase.from_date, purchase.to_date, products.options_value]);
   const onPageChange = (page) => { fetchPurchaseData(page) }; // data table page change
 
@@ -43,7 +43,7 @@ const Table_Purchase = () => {
       cell: row => <div className="d-flex align-items-center gap-2">
         <Link to={`#`} className="btn btn-outline-primary rounded-0 btn-sm"><BsEyeFill /></Link>
         <Link to={`/purchase-update/${row._id}`} className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
-        <button type="button" onClick={() => (row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
+        <button type="button" onClick={() => deletePurchase(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
       </div>,
       width: "150px"
     }
