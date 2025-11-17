@@ -44,7 +44,7 @@ const Table_Customer_Payment = () => {
       selector: row => row.payment_method
     },
     {
-      name: "Payment Recevied",
+      name: "Recevied By",
       selector: row => row.received_by ?? 'N/A'
     },
     {

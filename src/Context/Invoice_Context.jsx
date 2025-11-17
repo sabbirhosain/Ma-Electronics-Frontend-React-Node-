@@ -41,7 +41,6 @@ const Invoice_Context = ({ children }) => {
     const invoice_options_select = (select) => { updateInvoiceState({ options_value: select }) };
     const invoice_options_search = (search) => { updateInvoiceState({ search: search }) };
 
-
     const deleteInvoice = async (id) => {
         try {
             const confirm_delete = window.confirm('Are You Sure ? You Want to Delete!');

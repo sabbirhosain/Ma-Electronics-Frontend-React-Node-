@@ -10,10 +10,9 @@ const Create_Customer_Payment = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
+  const [customer_payment, setCustomer_Payment] = useState({ date_and_time: '', invoice_id: '', payable_amount: '', payment_method: '', payment_reference: '' })
   const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
-
-  const [customer_payment, setCustomer_Payment] = useState({ invoice_id: "", customer_name: "", customer_phone: "", previous_due: "", payable_amount: "", current_due: "", payment_method: "", payment_reference: "", received_by_id: "" });
-  const { invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search } = useInvoice_Context()
+  const { invoice, fetchInvoiceData, invoice_options_select, invoice_options_search } = useInvoice_Context()
   useEffect(() => { fetchInvoiceData(1) }, [invoice.search]);
 
   const handleChange = (event) => {
@@ -46,21 +45,36 @@ const Create_Customer_Payment = () => {
                   />
                 </div>
 
-                <div className="col-md-12 mb-3">
+                <div className="col-md-6 mb-3">
                   <label className='form-label'>Date and Time</label>
-                  <input type="text" name="date_and_time" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                  <input type="date" name="date_and_time" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
                 </div>
 
-                <div className="col-md-12 mb-3">
-                  <label className='form-label'>Description</label>
-                  <textarea rows="3" name="description" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
+                <div className="col-md-6 mb-3">
+                  <label className='form-label'>Payable Amount</label>
+                  <input type="number" name="payable_amount" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className='form-label'>Payment Method</label>
+                  <select className="form-select rounded-0">
+                    <option value=''>Select Method</option>
+                    <option value='cash'>Cash</option>
+                    <option value='bank_transfer'>Bank Transfer</option>
+                    <option value='mobile_banking'>Mobile Banking</option>
+                  </select>
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className='form-label'>Payment Reference</label>
+                  <input type="number" name="payment_reference" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
                 </div>
 
               </div>
 
               <div className="row">
                 <div className="col-md-6 mt-3">
-                  <Link to='/product-table' className='btn btn-dark rounded-0 w-100 custom_btn'>Cancel</Link>
+                  <Link to='/customer-payment-table' className='btn btn-dark rounded-0 w-100 custom_btn'>Cancel</Link>
                 </div>
                 <div className="col-md-6 mt-3">
                   <button type="submit" className='btn btn-dark rounded-0 w-100 custom_btn'>{loading ? "Please Wait" : "Create"}</button>
