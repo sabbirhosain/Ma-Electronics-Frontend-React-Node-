@@ -23,9 +23,11 @@ const Invoice_Context = ({ children }) => {
 
             if (response && response.data) {
                 const data = response.data.payload || [];
+                console.log(data);
+                
                 updateInvoiceState({
                     data: data, pagination: response.data.pagination || null,
-                    options: data.map(invoice => ({ value: invoice._id, label: invoice._id + ' - ' + invoice.customer_name + ' - ' + invoice.customer_phone + ' - ' + invoice.current_due + ' ' + invoice.currency_type })),
+                    options: data.map(invoice => ({ value: invoice._id, label: invoice.invoice_no + ' - ' + invoice.customer_name + ' - ' + invoice.customer_phone + ' - ' + invoice.current_due + ' ' + invoice.currency_type })),
                 });
             }
 
