@@ -8,7 +8,7 @@ import { useProduct_Context } from '../../Context/Product_Context'
 import { single_purchase, update_purchase } from '../../api_base_routes'
 
 const Update_Purchase = () => {
-  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
+  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
   const { products, updateProductState, fetchProductsData, products_options_select, products_options_search } = useProduct_Context()
   useEffect(() => { fetchProductsData(1) }, [products.search]);
 

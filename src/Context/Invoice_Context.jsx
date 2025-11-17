@@ -1,6 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
-import { show_invoice } from "../api_base_routes";
+import { delete_invoice, show_invoice } from "../api_base_routes";
+import { toast } from "react-toastify";
 
 const Invoice_Context_Provider = createContext();
 const Invoice_Context = ({ children }) => {
@@ -23,8 +24,6 @@ const Invoice_Context = ({ children }) => {
 
             if (response && response.data) {
                 const data = response.data.payload || [];
-                console.log(data);
-                
                 updateInvoiceState({
                     data: data, pagination: response.data.pagination || null,
                     options: data.map(invoice => ({ value: invoice._id, label: invoice.invoice_no + ' - ' + invoice.customer_name + ' - ' + invoice.customer_phone + ' - ' + invoice.current_due + ' ' + invoice.currency_type })),
@@ -43,10 +42,32 @@ const Invoice_Context = ({ children }) => {
     const invoice_options_search = (search) => { updateInvoiceState({ search: search }) };
 
 
+    const deleteInvoice = async (id) => {
+        try {
+            const confirm_delete = window.confirm('Are You Sure ? You Want to Delete!');
+            if (!confirm_delete) return;
+
+            updateInvoiceState({ isLoading: true });
+            const response = await axios.delete(`${delete_invoice}${id}`);
+            if (response && response.data && response.data.success) {
+                fetchInvoiceData(1)
+                toast.success(response.data.message || 'Delete Success.')
+            } else {
+                alert(response.data.message || 'Field Error')
+            }
+
+        } catch (error) {
+            console.log('Internal Server Error', error);
+
+        } finally {
+            updateInvoiceState({ isLoading: false });
+        }
+    }
+
 
 
     return (
-        <Invoice_Context_Provider.Provider value={{ invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search }}>
+        <Invoice_Context_Provider.Provider value={{ invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search, deleteInvoice }}>
             {children}
         </Invoice_Context_Provider.Provider>
     )

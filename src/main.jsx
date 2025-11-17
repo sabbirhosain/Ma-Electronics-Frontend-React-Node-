@@ -8,6 +8,8 @@ import UnitType_Context from './Context/UnitType_Context.jsx'
 import Product_Context from './Context/Product_Context.jsx'
 import Purchase_Context from './Context/Purchase_Context.jsx'
 import Invoice_Context from './Context/Invoice_Context.jsx'
+import Customer_Payment_Context from './Context/Customer_Payment_Context.jsx'
+import Expense_Context from './Context/Expense_Context.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -17,7 +19,11 @@ createRoot(document.getElementById('root')).render(
           <Product_Context>
             <Purchase_Context>
               <Invoice_Context>
-                <App />
+                <Customer_Payment_Context>
+                  <Expense_Context>
+                    <App />
+                  </Expense_Context>
+                </Customer_Payment_Context>
               </Invoice_Context>
             </Purchase_Context>
           </Product_Context>

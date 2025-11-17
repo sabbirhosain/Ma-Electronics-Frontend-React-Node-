@@ -10,7 +10,7 @@ const Create_Customer_Payment = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
-  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
+  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
 
   const [customer_payment, setCustomer_Payment] = useState({ invoice_id: "", customer_name: "", customer_phone: "", previous_due: "", payable_amount: "", current_due: "", payment_method: "", payment_reference: "", received_by_id: "" });
   const { invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search } = useInvoice_Context()

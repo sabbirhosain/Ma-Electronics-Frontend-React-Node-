@@ -107,7 +107,7 @@
     color: black;
     font-size: 16px;
     font-family: var(--primary-fonts);
-    font-weight: 100;
+    font-weight: 300;
     letter-spacing: 1px;
     text-align: left;
     padding: 5px 0px 5px 10px;
@@ -161,7 +161,7 @@
 
 .company_brand {
     font-size: 20px;
-    font-weight: 100;
+    font-weight: 300;
     margin-left: 260px;
     font-family: var(--primary-fonts);
     text-transform: capitalize;

@@ -9,7 +9,7 @@ import Select from 'react-select'
 import axios from 'axios'
 
 const Create_Product = () => {
-  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
+  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
   const { categories, updateCategoriesState, fetchCategoriesData, categories_options_select, categories_options_search } = useCategories_Context()
   const { unit_types, updateUnitTypesState, fetchUnitTypesData, units_options_select, units_options_search } = useUnitType_Context()
   useEffect(() => { fetchCategoriesData(1) }, [categories.search]);
