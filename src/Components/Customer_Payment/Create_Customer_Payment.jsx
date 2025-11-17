@@ -1,8 +1,77 @@
-import React from 'react'
+import { toast } from 'react-toastify'
+import Select from 'react-select'
+import axios from 'axios'
+import Layout from '../../Layout/Layout'
+import { useEffect, useState } from 'react'
+import { useInvoice_Context } from '../../Context/Invoice_Context'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Create_Customer_Payment = () => {
+  const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+  const [error_message, setError_message] = useState({});
+  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
+
+  const [customer_payment, setCustomer_Payment] = useState({ invoice_id: "", customer_name: "", customer_phone: "", previous_due: "", payable_amount: "", current_due: "", payment_method: "", payment_reference: "", received_by_id: "" });
+  const { invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search } = useInvoice_Context()
+  useEffect(() => { fetchInvoiceData(1) }, [invoice.search]);
+
+  const handleChange = (event) => {
+    const { name, value, files, type } = event.target;
+    setCustomer_Payment((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
+    setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
+  };
+
   return (
-    <div>Create_Customer_payment</div>
+    <Layout>
+      <section className='container my-5'>
+        <div className="row justify-content-center">
+          <div className="col-md-8">
+            <form className='shadow-sm bg-light px-5 pt-3 pb-4'>
+              <h4 className='form_heading py-4'>Add Customer Payment</h4>
+              <div className="row border-top border-warning pt-4">
+                <div className="col-md-12 mb-3">
+                  <label className='form-label'>Invoice</label>
+                  <Select
+                    options={invoice.options}
+                    value={invoice.options_value}
+                    onChange={invoice_options_select}
+                    onInputChange={invoice_options_search}
+                    isLoading={invoice.isLoading}
+                    placeholder={invoice.isLoading ? "Loading..." : "Select Invoice"}
+                    isClearable={true}
+                    styles={customStyles}
+                    maxMenuHeight={300}
+                    required
+                  />
+                </div>
+
+                <div className="col-md-12 mb-3">
+                  <label className='form-label'>Product Name</label>
+                  <input type="text" name="item_name" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                </div>
+
+                <div className="col-md-12 mb-3">
+                  <label className='form-label'>Description</label>
+                  <textarea rows="3" name="description" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
+                </div>
+
+              </div>
+
+              <div className="row">
+                <div className="col-md-6 mt-3">
+                  <Link to='/product-table' className='btn btn-dark rounded-0 w-100 custom_btn'>Cancel</Link>
+                </div>
+                <div className="col-md-6 mt-3">
+                  <button type="submit" className='btn btn-dark rounded-0 w-100 custom_btn'>{loading ? "Please Wait" : "Create"}</button>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </section>
+    </Layout>
   )
 }
 

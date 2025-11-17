@@ -1,8 +1,9 @@
 import React from 'react'
+import Layout from '../../Layout/Layout'
 
 const Update_Customer_Payment = () => {
   return (
-    <div>Update_Customer_Payment</div>
+    <Layout>Update_Customer_Payment</Layout>
   )
 }
 
