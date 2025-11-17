@@ -70,12 +70,6 @@ const Sidebar = () => {
                         </div>
 
                         <li className="dropdown_list">
-                            <NavLink to='/customer-table' className="dropdown_btn">
-                                <span className="dropdown_list_name"><HiMiniUsers className="dropdown_list_icon" />Customer</span>
-                            </NavLink>
-                        </li>
-
-                        <li className="dropdown_list">
                             <NavLink to='/expense-table' className="dropdown_btn">
                                 <span className="dropdown_list_name"><FaHandHoldingUsd className="dropdown_list_icon" />Expense</span>
                             </NavLink>

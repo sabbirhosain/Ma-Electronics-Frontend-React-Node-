@@ -7,7 +7,6 @@ import Dashboard_Page from "./Pages/Dashboard_Page"
 import Categories_Page from "./Pages/Categories_Page"
 import Purchase_Page from "./Pages/Purchase_Page"
 import Products_Page from "./Pages/Products_Page"
-import Customer_Page from "./Pages/Customer_Page"
 import Invoice_Page from "./Pages/Invoice_Page"
 import Expense_Page from "./Pages/Expense_Page"
 import Settings_Page from "./Pages/Settings_Page"
@@ -25,6 +24,8 @@ import Create_Invoice from "./Components/Invoice/Create_Invoice"
 import View_Invoice from "./Components/Invoice/View_Invoice"
 import Create_Customer_Payment from "./Components/Customer_Payment/Create_Customer_Payment"
 import Update_Customer_Payment from "./Components/Customer_Payment/Update_Customer_Payment"
+import Create_Expense from "./Components/Expense/Create_Expense"
+import Update_Expense from "./Components/Expense/Update_Expense"
 import './App.css'
 
 const App = () => {
@@ -48,7 +49,6 @@ const App = () => {
         <Route path="/purchase-table" element={<Purchase_Page />} />
         <Route path="/purchase-create" element={<Create_Purchase />} />
         <Route path="/purchase-update/:id" element={<Update_Purchase />} />
-        <Route path="/customer-table" element={<Customer_Page />} />
         <Route path="/invoice-table" element={<Invoice_Page />} />
         <Route path="/invoice-create" element={<Create_Invoice />} />
         <Route path="/invoice-view/:id" element={<View_Invoice />} />
@@ -56,6 +56,8 @@ const App = () => {
         <Route path="/customer-payment-update/:id" element={<Update_Customer_Payment />} />
         <Route path="/customer-payment-table" element={<Customer_Payment_Pages />} />
         <Route path="/expense-table" element={<Expense_Page />} />
+        <Route path="/expense-create" element={<Create_Expense />} />
+        <Route path="/expense-update/:id" element={<Update_Expense />} />
         <Route path="/profile-settings" element={<Settings_Page />} />
       </Routes>
     </>

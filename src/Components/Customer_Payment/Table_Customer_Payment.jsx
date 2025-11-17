@@ -16,8 +16,8 @@ const Table_Customer_Payment = () => {
       width: "60px"
     },
     {
-      name: "Invoice Id",
-      selector: row => row.invoice_id
+      name: "Invoice No",
+      selector: row => row.invoice_no
     },
     {
       name: "Date and Time",

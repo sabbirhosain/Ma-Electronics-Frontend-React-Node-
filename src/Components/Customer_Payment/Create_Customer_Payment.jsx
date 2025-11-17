@@ -47,8 +47,8 @@ const Create_Customer_Payment = () => {
                 </div>
 
                 <div className="col-md-12 mb-3">
-                  <label className='form-label'>Product Name</label>
-                  <input type="text" name="item_name" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                  <label className='form-label'>Date and Time</label>
+                  <input type="text" name="date_and_time" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
                 </div>
 
                 <div className="col-md-12 mb-3">
