@@ -34,3 +34,9 @@ export const show_customer_payment = import.meta.env.VITE_API_URL + "/api/v1/inv
 export const single_customer_payment = import.meta.env.VITE_API_URL + "/api/v1/invoice/customer/customer-pay/";
 export const update_customer_payment = import.meta.env.VITE_API_URL + "/api/v1/invoice/customer/customer-pay/";
 export const delete_customer_payment = import.meta.env.VITE_API_URL + "/api/v1/invoice/customer/customer-pay/";
+
+export const create_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense";
+export const show_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense";
+export const single_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";
+export const update_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";
+export const delete_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";

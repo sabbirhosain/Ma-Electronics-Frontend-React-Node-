@@ -81,9 +81,6 @@ const Update_Product = () => {
     }
   }
 
-
-
-
   return (
     <Layout>
       <section className='container my-5'>
