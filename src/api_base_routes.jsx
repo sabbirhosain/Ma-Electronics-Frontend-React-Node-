@@ -27,7 +27,8 @@ export const show_invoice = import.meta.env.VITE_API_URL + "/api/v1/items/invoic
 export const single_invoice = import.meta.env.VITE_API_URL + "/api/v1/items/invoice/";
 export const update_invoice = import.meta.env.VITE_API_URL + "/api/v1/items/invoice/";
 export const delete_invoice = import.meta.env.VITE_API_URL + "/api/v1/items/invoice/";
-export const filter_invoice = import.meta.env.VITE_API_URL + "/api/v1/items/invoice-filter";
+export const show_invoice_filter = import.meta.env.VITE_API_URL + "/api/v1/items/invoice-filter";
+export const single_invoice_filter = import.meta.env.VITE_API_URL + "/api/v1/items/invoice-filter/";
 
 export const create_customer_payment = import.meta.env.VITE_API_URL + "/api/v1/invoice/customer/customer-pay";
 export const show_customer_payment = import.meta.env.VITE_API_URL + "/api/v1/invoice/customer/customer-pay";

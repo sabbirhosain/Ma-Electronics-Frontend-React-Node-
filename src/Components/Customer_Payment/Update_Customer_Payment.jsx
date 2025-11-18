@@ -14,8 +14,8 @@ const Update_Customer_Payment = () => {
   const [error_message, setError_message] = useState({});
   const [customer_payment, setCustomer_Payment] = useState({ date_and_time: '', invoice_id: '', payable_amount: '', payment_method: '', payment_reference: '' })
   const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
-  const { invoice, updateInvoiceState, fetchInvoiceData, invoice_options_select, invoice_options_search } = useInvoice_Context()
-  useEffect(() => { fetchInvoiceData(1) }, [invoice.search]);
+  const { invoice_filter, updateInvoiceFilterState, fetchInvoiceFilterData, invoice_options_select, invoice_options_search } = useInvoice_Context()
+  useEffect(() => { fetchInvoiceFilterData(1) }, [invoice_filter.search]);
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -31,7 +31,7 @@ const Update_Customer_Payment = () => {
         if (response && response.data) {
           const result = response.data.payload;
           setCustomer_Payment({ date_and_time: result.date_and_time, payable_amount: result.payable_amount, payment_method: result.payment_method, payment_reference: result.payment_reference });
-          updateInvoiceState({ options_value: { value: result.invoice_id, label: result.invoice_no } });
+          updateInvoiceFilterState({ options_value: { value: result.invoice_id, label: result.invoice_no } });
         }
       } catch (error) {
         toast.error(error.response.data || 'Internal Server Error');
@@ -52,7 +52,7 @@ const Update_Customer_Payment = () => {
     try {
       const response = await axios.put(`${update_customer_payment}${id}`, {
         date_and_time: customer_payment.date_and_time,
-        invoice_id: invoice.options_value?.value,
+        invoice_id: invoice_filter.options_value?.value,
         payable_amount: customer_payment.payable_amount,
         payment_method: customer_payment.payment_method,
         payment_reference: customer_payment.payment_reference
@@ -84,12 +84,12 @@ const Update_Customer_Payment = () => {
                 <div className="col-md-12 mb-3">
                   <label className='form-label'>Invoice</label>
                   <Select
-                    options={invoice.options}
-                    value={invoice.options_value}
+                    options={invoice_filter.options}
+                    value={invoice_filter.options_value}
                     onChange={invoice_options_select}
                     onInputChange={invoice_options_search}
-                    isLoading={invoice.isLoading}
-                    placeholder={invoice.isLoading ? "Loading..." : "Select Invoice"}
+                    isLoading={invoice_filter.isLoading}
+                    placeholder={invoice_filter.isLoading ? "Loading..." : "Select Invoice"}
                     isClearable={true}
                     styles={customStyles}
                     maxMenuHeight={300}

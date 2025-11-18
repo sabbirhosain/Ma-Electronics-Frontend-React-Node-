@@ -51,7 +51,7 @@ const Table_Customer_Payment = () => {
       name: "Action",
       cell: row => <div className="d-flex align-items-center gap-2">
         <Link to={`/customer-payment-update/${row._id}`} className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
-        {row.items_count === 0 ? (<button type="button" onClick={() => deleteCategory(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>) : (<button type="button" className="btn btn-dark rounded-0 btn-sm" disabled><BiTrash /></button>)}
+        <button type="button" onClick={() => deleteCategory(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
       </div>,
       width: "150px"
     }

@@ -2,22 +2,22 @@ import React, { useState } from 'react'
 import Layout from '../../Layout/Layout'
 import { Link, useNavigate } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
+import Update_Product_Model from './Update_Product_Model';
+import Invoice_Product_Table from './Invoice_Product_Table';
 
 const Create_Invoice = () => {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: "", discount: "", discount_type: "", tax: "", advance_pay: "", customer_name: "", customer_phone: "", customer_address: "", payment_method: "" });
-  const [invoice_products, setInvoice_Products] = useState([{ product_id: '', unit_price: '', quentity: '' }])
+  const [invoice, setInvoice] = useState({ date_and_time: "", discount: "", discount_type: "", tax: "", advance_pay: "", customer_name: "", customer_phone: "", customer_address: "", payment_method: "", product_list: [{ product_name: '', unit_price: '', quentity: '', price: '' }] });
+  console.log(invoice);
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
     setInvoice((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
-
-
 
 
   return (
@@ -86,9 +86,9 @@ const Create_Invoice = () => {
                 <div className="col-12 mb-3">
                   <div className="d-flex align-items-center justify-content-between border-bottom border-warning pb-2 my-4">
                     <h5 className='form_heading' style={{ fontSize: '18px' }}>Product List</h5>
-                    <button type="button" class="btn btn-primary rounded-0 custom_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Product</button>
-                    <Add_Product_Model />
+                    <button type="button" className="btn btn-primary rounded-0 custom_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Product</button>
                   </div>
+                  <Invoice_Product_Table />
                 </div>
 
               </div>
@@ -101,8 +101,9 @@ const Create_Invoice = () => {
                   <button type="submit" className='btn btn-success rounded-0 w-100 custom_btn'>Create</button>
                 </div>
               </div>
-
             </form>
+            <Add_Product_Model />
+            <Update_Product_Model />
           </div>
         </div>
       </section>

@@ -9,11 +9,11 @@ const Add_Product_Model = () => {
 
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
-  const [product, setProduct] = useState({ date_and_time: "", quentity: "", supplier_name: "" });
+  const [invoice_products, setInvoice_Products] = useState([{ product_id: '', unit_price: '', quentity: '', price: '' }])
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
-    setProduct((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
+    setInvoice_Products((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
 
@@ -48,6 +48,10 @@ const Add_Product_Model = () => {
             <div className="col-md-6 mb-3">
               <label className='form-label'>Unit Price</label>
               <input type="number" name="unit_price" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+            </div>
+            <div className="col-md-6 mb-3">
+              <label className='form-label'>Total Price</label>
+              <input type="number" value={parseFloat(invoice_products.quentity) * parseFloat(invoice_products.unit_price) || 0} onChange={handleChange} className='form-control rounded-0' disabled={loading} readOnly />
             </div>
           </div>
           <div className="modal-footer">
