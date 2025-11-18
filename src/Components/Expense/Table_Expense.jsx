@@ -21,10 +21,7 @@ const Table_Expense = () => {
     },
     {
       name: "Attachment ",
-      selector: row => (row.attachment ? <a href={row.attachment} target="_new" rel="noopener noreferrer">
-        <img src={placeholder} width="30px" height="30px" alt="Attachment file" />
-      </a> : <span className="text-muted">No File</span>
-      )
+      selector: row => (row.attachment ? <a href={row.attachment} target="_new" rel="noopener noreferrer"></a> : <span className="text-muted">No File</span>)
     },
     {
       name: "Expense Amount",

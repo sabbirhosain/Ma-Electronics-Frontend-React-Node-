@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import Layout from '../../Layout/Layout'
 import { Link, useNavigate } from 'react-router-dom'
+import Add_Product_Model from './Add_Product_Model';
 
 const Create_Invoice = () => {
 
@@ -85,7 +86,8 @@ const Create_Invoice = () => {
                 <div className="col-12 mb-3">
                   <div className="d-flex align-items-center justify-content-between border-bottom border-warning pb-2 my-4">
                     <h5 className='form_heading' style={{ fontSize: '18px' }}>Product List</h5>
-                    <Link to='' className='btn btn-sm btn-outline-secondary rounded-0'>Add New</Link>
+                    <button type="button" class="btn btn-primary rounded-0 custom_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Product</button>
+                    <Add_Product_Model />
                   </div>
                 </div>
 
