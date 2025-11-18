@@ -8,11 +8,11 @@ import Select from 'react-select'
 import { useEffect } from 'react'
 
 const Purchase_Page = () => {
-  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
+  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
   const { products, fetchProductsData, products_options_select, products_options_search } = useProduct_Context()
   const { updatePurchaseState } = usePurchase_Context()
   useEffect(() => { fetchProductsData(1) }, [products.search]);
-  
+
   return (
     <Layout>
       <section className=''>

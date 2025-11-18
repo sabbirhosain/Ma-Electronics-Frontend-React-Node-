@@ -9,7 +9,7 @@ import { useEffect } from 'react'
 
 
 const Products_Page = () => {
-  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Mozilla Headline" }) };
+  const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
   const { categories, fetchCategoriesData, categories_options_select, categories_options_search } = useCategories_Context()
   useEffect(() => { fetchCategoriesData(1) }, [categories.search]);
   const { updateProductState } = useProduct_Context()
