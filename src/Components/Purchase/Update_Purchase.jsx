@@ -85,7 +85,7 @@ const Update_Purchase = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className='form-label'>Date and Time</label>
-                  <input type="date" name="date_and_time" value={purchase.date_and_time || ''} onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                  <input type="date" name="date_and_time" value={purchase.date_and_time.split("T")[0] || ''} onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
                 </div>
 
                 <div className="col-md-6 mb-3">

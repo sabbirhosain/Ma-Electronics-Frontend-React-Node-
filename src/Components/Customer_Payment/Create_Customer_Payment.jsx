@@ -1,10 +1,11 @@
+import { useInvoice_Context } from '../../Context/Invoice_Context'
+import { create_customer_payment } from '../../api_base_routes'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
+import Layout from '../../Layout/Layout'
 import { toast } from 'react-toastify'
 import Select from 'react-select'
 import axios from 'axios'
-import Layout from '../../Layout/Layout'
-import { useEffect, useState } from 'react'
-import { useInvoice_Context } from '../../Context/Invoice_Context'
-import { Link, useNavigate } from 'react-router-dom'
 
 const Create_Customer_Payment = () => {
   const navigate = useNavigate();
@@ -21,12 +22,40 @@ const Create_Customer_Payment = () => {
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
 
+  // --- Form Submit ---
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError_message({});
+
+    try {
+      const response = await axios.post(create_customer_payment, {
+        date_and_time: customer_payment.date_and_time,
+        invoice_id: invoice.options_value.value,
+        payable_amount: customer_payment.payable_amount,
+        payment_method: customer_payment.payment_method,
+        payment_reference: customer_payment.payment_reference
+      });
+
+      if (response && response.data && response.data.success) {
+        navigate("/customer-payment-table");
+        toast.success(response.data.message || "Create Success.");
+      } else {
+        alert(response.data.message || "Field Error");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <Layout>
       <section className='container my-5'>
         <div className="row justify-content-center">
           <div className="col-md-8">
-            <form className='shadow-sm bg-light px-5 pt-3 pb-4'>
+            <form onSubmit={handleSubmit} className='shadow-sm bg-light px-5 pt-3 pb-4'>
               <h4 className='form_heading py-4'>Add Customer Payment</h4>
               <div className="row border-top border-warning pt-4">
                 <div className="col-md-12 mb-3">
@@ -52,12 +81,12 @@ const Create_Customer_Payment = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className='form-label'>Payable Amount</label>
-                  <input type="number" name="payable_amount" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                  <input type="number" name="payable_amount" min='1' onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
                 </div>
 
                 <div className="col-md-6 mb-3">
                   <label className='form-label'>Payment Method</label>
-                  <select className="form-select rounded-0">
+                  <select className="form-select rounded-0" name='payment_method' onChange={handleChange}>
                     <option value=''>Select Method</option>
                     <option value='cash'>Cash</option>
                     <option value='bank_transfer'>Bank Transfer</option>
@@ -67,7 +96,7 @@ const Create_Customer_Payment = () => {
 
                 <div className="col-md-6 mb-3">
                   <label className='form-label'>Payment Reference</label>
-                  <input type="number" name="payment_reference" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                  <input type="text" name="payment_reference" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
                 </div>
 
               </div>
