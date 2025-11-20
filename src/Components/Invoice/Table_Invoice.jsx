@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { BsEyeFill } from 'react-icons/bs';
-import { SlPrinter } from "react-icons/sl";
 import { BiEditAlt, BiTrash } from 'react-icons/bi';
 import DataTable from 'react-data-table-component';
 import { useInvoice_Context } from '../../Context/Invoice_Context'
