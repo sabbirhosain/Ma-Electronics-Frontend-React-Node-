@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout/Layout'
 import { Link, useNavigate } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
@@ -13,13 +13,31 @@ const Create_Invoice = () => {
   const { invoice_products } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
   const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", grand_total: "" });
-  console.log(invoice_products);
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
     setInvoice((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
+
+
+  useEffect(() => {
+    const total = invoice_products.reduce((sum, item) => { return sum + Number(item.unit_price) * Number(item.quentity) }, 0);
+
+    let discountAmount = 0;
+    if (invoice.discount_type === "percent") {
+      discountAmount = (total * Number(invoice.discount)) / 100;
+    } else {
+      discountAmount = Number(invoice.discount);
+    }
+
+    const taxAmount = Number(invoice.tax) || 0;
+    const subTotal = total - discountAmount + taxAmount;
+    const grandTotal = subTotal - Number(invoice.advance_pay || 0);
+    setInvoice(prev => ({ ...prev, total_price: total.toFixed(2), sub_total: subTotal.toFixed(2), grand_total: grandTotal.toFixed(2) }));
+
+  }, [invoice_products, invoice.discount, invoice.discount_type, invoice.tax, invoice.advance_pay]);
+
 
 
   return (
