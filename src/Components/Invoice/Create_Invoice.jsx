@@ -4,13 +4,16 @@ import { Link, useNavigate } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
 import Update_Product_Model from './Update_Product_Model';
 import Invoice_Product_Table from './Invoice_Product_Table';
+import { useInvoice_Context } from '../../Context/Invoice_Context';
 
 const Create_Invoice = () => {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
+  const { invoice_products } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: "", discount: "", discount_type: "", tax: "", advance_pay: "", customer_name: "", customer_phone: "", customer_address: "", payment_method: "", product_list: [{ product_name: '', unit_price: '', quentity: '', price: '' }] });
+  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", grand_total: "" });
+  console.log(invoice_products);
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -30,22 +33,22 @@ const Create_Invoice = () => {
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Date and Time</label>
-                  <input type="date" className='form-control rounded-0' />
+                  <input type="date" name='date_and_time' value={invoice.date_and_time} onChange={handleChange} className='form-control rounded-0' />
                 </div>
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Customer Name</label>
-                  <input type="text" className='form-control rounded-0' />
+                  <input type="text" name='customer_name' value={invoice.customer_name} onChange={handleChange} className='form-control rounded-0' />
                 </div>
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Customer Phone</label>
-                  <input type="text" className='form-control rounded-0' />
+                  <input type="text" name='customer_phone' value={invoice.customer_phone} onChange={handleChange} className='form-control rounded-0' />
                 </div>
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Customer Address</label>
-                  <input type="text" className='form-control rounded-0' />
+                  <input type="text" name='customer_address' value={invoice.customer_address} onChange={handleChange} className='form-control rounded-0' />
                 </div>
 
                 <div className="col-12 mb-3">
@@ -61,15 +64,15 @@ const Create_Invoice = () => {
                 <div className="col-md-5">
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Total Price :</label></div>
-                    <div className="col-4 pe-1"><input type="text" value='' className="form-control rounded-0" readOnly /></div>
+                    <div className="col-4 pe-1"><input type="text" value={invoice.total_price || 0} className="form-control rounded-0" readOnly /></div>
                     <div className="col-2 ps-1"><input type="text" value='TK' className="form-control rounded-0" readOnly /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Discount :</label></div>
-                    <div className="col-4 pe-1"><input type="number" min='0' max='100' className="form-control rounded-0" /></div>
+                    <div className="col-4 pe-1"><input type="number" name='discount' value={invoice.discount} onChange={handleChange} min='0' max='100' className="form-control rounded-0" /></div>
                     <div className="col-2 ps-1">
-                      <select className="form-select rounded-0">
+                      <select className="form-select rounded-0" name='discount_type' value={invoice.discount_type} onChange={handleChange}>
                         <option value='amount'>Tk</option>
                         <option value='percent'>%</option>
                       </select>
@@ -78,23 +81,23 @@ const Create_Invoice = () => {
 
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Tax :</label></div>
-                    <div className="col-6"><input type="number" min='0' className="form-control rounded-0" /></div>
+                    <div className="col-6"><input type="number" name='tax' value={invoice.tax} onChange={handleChange} min='0' className="form-control rounded-0" /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Sub Total :</label></div>
-                    <div className="col-6"><input type="text" className="form-control rounded-0" readOnly /></div>
+                    <div className="col-6"><input type="text" value={invoice.sub_total} className="form-control rounded-0" readOnly /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Advance Pay :</label></div>
-                    <div className="col-6"><input type="number" min='0' className="form-control rounded-0" /></div>
+                    <div className="col-6"><input type="number" name='advance_pay' value={invoice.advance_pay} onChange={handleChange} min='0' className="form-control rounded-0" /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className='form-label d-block text-end'>Payment Method :</label></div>
                     <div className="col-6">
-                      <select className="form-select rounded-0">
+                      <select className="form-select rounded-0" name='payment_method' value={invoice.payment_method} onChange={handleChange}>
                         <option value=''>Select Method</option>
                         <option value='cash'>Cash</option>
                         <option value='bank_transfer'>Bank Transfer</option>
@@ -105,7 +108,7 @@ const Create_Invoice = () => {
 
                   <div className="row align-items-center">
                     <div className="col-6"><label className="form-label d-block text-end">Grand Total :</label></div>
-                    <div className="col-6"><input type="text" className="form-control rounded-0" readOnly /></div>
+                    <div className="col-6"><input type="text" value={invoice.grand_total} className="form-control rounded-0" readOnly /></div>
                   </div>
 
                 </div>

@@ -1,52 +1,78 @@
-import { useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { BsEyeFill } from 'react-icons/bs';
-import { BiEditAlt, BiTrash } from 'react-icons/bi';
+import { BiTrash } from 'react-icons/bi';
 import DataTable from 'react-data-table-component';
+import { useInvoice_Context } from '../../Context/Invoice_Context';
 
 const Invoice_Product_Table = () => {
+  const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context();
+
+  const handleUpdate = (productValue, field, delta) => {
+    setInvoice_Products(prev => {
+      return prev.map(item => {
+        if (item.product.value === productValue) {
+          const currentValue = parseFloat(item[field]) || 0;
+          const newValue = Math.max(currentValue + delta, 0);
+          const updatedItem = { ...item, [field]: newValue };
+
+          // recalculate price  
+          const unit = parseFloat(updatedItem.unit_price) || 0;
+          const qty = parseFloat(updatedItem.quentity) || 0;
+          updatedItem.price = (unit * qty).toFixed(2);
+          return updatedItem;
+        }
+        return item;
+      });
+    });
+  };
+
+
+
+  const handleDelete = (productValue) => {
+    setDisabledProducts(prev => prev.filter(value => value !== productValue));
+    setInvoice_Products(prev => prev.filter(item => item.product.value !== productValue));
+  };
+
   const columns = [
     {
       name: 'Items Name',
-      selector: row => row.title,
+      selector: row => row.product.label,
+    },
+    {
+      name: 'Quantity',
+      cell: (row) => (
+        <div className="d-flex align-items-center">
+          <button type='button' className="btn btn-sm btn-danger rounded-0 me-2" onClick={() => handleUpdate(row.product.value, 'quentity', -1)}>-</button>
+          <span>{row.quentity}</span>
+          <button type='button' className="btn btn-sm btn-success rounded-0 ms-2" onClick={() => handleUpdate(row.product.value, 'quentity', 1)}>+</button>
+        </div>
+      )
     },
     {
       name: 'Unit Price',
-      selector: row => row.year,
+      cell: (row) => (
+        <div className="d-flex align-items-center">
+          <button type='button' className="btn btn-sm btn-danger rounded-0 me-2" onClick={() => handleUpdate(row.product.value, 'unit_price', -1)}>-</button>
+          <span>{row.unit_price}</span>
+          <button type='button' className="btn btn-sm btn-success rounded-0 ms-2" onClick={() => handleUpdate(row.product.value, 'unit_price', 1)}>+</button>
+        </div>
+      )
     },
     {
-      name: 'Quentity',
-      selector: row => row.year,
-    },
-    {
-      name: 'Price',
-      selector: row => row.year,
+      name: 'Total',
+      selector: row => row.price
     },
     {
       name: "Action",
       cell: row => <div className="d-flex align-items-center gap-2">
-        <Link to='#' className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
-        <button type="button" onClick={() => (row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
+        <button type="button" onClick={() => handleDelete(row.product.value)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
       </div>
     }
   ];
 
-  const data = [
-    {
-      id: 1,
-      title: 'Macbook Pro 2025',
-      year: '1988',
-    },
-    {
-      id: 2,
-      title: 'Macbook Air 2025',
-      year: '1984',
-    },
-  ]
   return (
     <DataTable
       columns={columns}
-      data={data}
+      data={invoice_products}
+      highlightOnHover
     />
   );
 }

@@ -35,7 +35,6 @@ const Invoice_Context = ({ children }) => {
     }
 
     // === invoice filter ===
-
     const [invoice_filter, setInvoice_Filter] = useState({ isLoading: false, data: [], pagination: null, search: '', error_message: null, options: [], options_value: null })
     const updateInvoiceFilterState = (newState) => { setInvoice_Filter(prev => ({ ...prev, ...newState })) };
 
@@ -89,10 +88,12 @@ const Invoice_Context = ({ children }) => {
         }
     }
 
-
+    // === Create Invoice ===
+    const [invoice_products, setInvoice_Products] = useState([])
+    const [disabledProducts, setDisabledProducts] = useState([]);
 
     return (
-        <Invoice_Context_Provider.Provider value={{ invoice, updateInvoiceState, fetchInvoiceData, invoice_filter, updateInvoiceFilterState, fetchInvoiceFilterData, invoice_options_select, invoice_options_search, deleteInvoice }}>
+        <Invoice_Context_Provider.Provider value={{ invoice, updateInvoiceState, fetchInvoiceData, invoice_filter, updateInvoiceFilterState, fetchInvoiceFilterData, invoice_options_select, invoice_options_search, deleteInvoice, invoice_products, setInvoice_Products, disabledProducts, setDisabledProducts }}>
             {children}
         </Invoice_Context_Provider.Provider>
     )

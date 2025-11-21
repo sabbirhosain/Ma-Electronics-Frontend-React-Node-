@@ -22,6 +22,7 @@ import Create_Unit_Types from "./Components/Unit_Types/Create_Unit_Types"
 import Update_Unit_Types from "./Components/Unit_Types/Update_Unit_Types"
 import Create_Invoice from "./Components/Invoice/Create_Invoice"
 import View_Invoice from "./Components/Invoice/View_Invoice"
+import Update_Invoice from "./Components/Invoice/Update_Invoice"
 import Create_Customer_Payment from "./Components/Customer_Payment/Create_Customer_Payment"
 import Update_Customer_Payment from "./Components/Customer_Payment/Update_Customer_Payment"
 import Create_Expense from "./Components/Expense/Create_Expense"
@@ -52,6 +53,7 @@ const App = () => {
         <Route path="/invoice-table" element={<Invoice_Page />} />
         <Route path="/invoice-create" element={<Create_Invoice />} />
         <Route path="/invoice-view/:id" element={<View_Invoice />} />
+        <Route path="/invoice-update/:id" element={<Update_Invoice />} />
         <Route path="/customer-payment-create" element={<Create_Customer_Payment />} />
         <Route path="/customer-payment-update/:id" element={<Update_Customer_Payment />} />
         <Route path="/customer-payment-table" element={<Customer_Payment_Pages />} />
