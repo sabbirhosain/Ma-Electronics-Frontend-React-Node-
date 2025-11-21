@@ -12,7 +12,7 @@ const Create_Invoice = () => {
   const [loading, setLoading] = useState(false);
   const { invoice_products } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", grand_total: "" });
+  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", total_due: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -33,10 +33,10 @@ const Create_Invoice = () => {
 
     const taxAmount = Number(invoice.tax) || 0;
     const subTotal = total - discountAmount + taxAmount;
-    const grandTotal = subTotal - Number(invoice.advance_pay || 0);
-    setInvoice(prev => ({ ...prev, total_price: total.toFixed(2), sub_total: subTotal.toFixed(2), grand_total: grandTotal.toFixed(2) }));
+    const totalDue = subTotal - Number(invoice.advance_pay || 0);
+    setInvoice(prev => ({ ...prev, total_price: total.toFixed(2), sub_total: subTotal.toFixed(2), total_due: totalDue.toFixed(2) }));
 
-  }, [invoice_products, invoice.discount, invoice.discount_type, invoice.tax, invoice.advance_pay]);
+  }, [invoice_products, invoice]);
 
 
 
@@ -125,8 +125,8 @@ const Create_Invoice = () => {
                   </div>
 
                   <div className="row align-items-center">
-                    <div className="col-6"><label className="form-label d-block text-end">Grand Total :</label></div>
-                    <div className="col-6"><input type="text" value={invoice.grand_total} className="form-control rounded-0" readOnly /></div>
+                    <div className="col-6"><label className="form-label d-block text-end">Total Due :</label></div>
+                    <div className="col-6"><input type="text" value={invoice.total_due} className="form-control rounded-0 bg-danger text-white" readOnly /></div>
                   </div>
 
                 </div>
