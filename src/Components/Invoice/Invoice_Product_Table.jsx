@@ -25,7 +25,6 @@ const Invoice_Product_Table = () => {
   };
 
 
-
   const handleDelete = (productValue) => {
     setDisabledProducts(prev => prev.filter(value => value !== productValue));
     setInvoice_Products(prev => prev.filter(item => item.product.value !== productValue));

@@ -5,6 +5,9 @@ import Add_Product_Model from './Add_Product_Model';
 import Update_Product_Model from './Update_Product_Model';
 import Invoice_Product_Table from './Invoice_Product_Table';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
+import { create_invoice } from '../../api_base_routes';
+import { toast } from 'react-toastify';
+import axios from 'axios';
 
 const Create_Invoice = () => {
 
@@ -12,7 +15,7 @@ const Create_Invoice = () => {
   const [loading, setLoading] = useState(false);
   const { invoice_products } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", total_due: "" });
+  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", currency_type: "BDT", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", total_due: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -20,24 +23,69 @@ const Create_Invoice = () => {
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
 
-
   useEffect(() => {
-    const total = invoice_products.reduce((sum, item) => { return sum + Number(item.unit_price) * Number(item.quentity) }, 0);
+    const total = invoice_products.reduce((sum, item) => {
+      return sum + Number(item.unit_price) * Number(item.quentity)
+    }, 0);
 
-    let discountAmount = 0;
-    if (invoice.discount_type === "percent") {
-      discountAmount = (total * Number(invoice.discount)) / 100;
-    } else {
-      discountAmount = Number(invoice.discount);
-    }
+    let discountAmount = invoice.discount_type === "percent"
+      ? (total * Number(invoice.discount)) / 100
+      : Number(invoice.discount);
 
     const taxAmount = Number(invoice.tax) || 0;
     const subTotal = total - discountAmount + taxAmount;
     const totalDue = subTotal - Number(invoice.advance_pay || 0);
-    setInvoice(prev => ({ ...prev, total_price: total.toFixed(2), sub_total: subTotal.toFixed(2), total_due: totalDue.toFixed(2) }));
 
-  }, [invoice_products, invoice]);
+    setInvoice(prev => ({
+      ...prev,
+      total_price: total.toFixed(2),
+      sub_total: subTotal.toFixed(2),
+      total_due: totalDue.toFixed(2)
+    }));
 
+  }, [invoice_products, invoice.discount, invoice.discount_type, invoice.tax, invoice.advance_pay]);
+
+
+  // --- Form Submit ---
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError_message({});
+
+    try {
+      const response = await axios.post(create_invoice, {
+        date_and_time: invoice.date_and_time,
+        customer_name: invoice.customer_name,
+        customer_phone: invoice.customer_phone,
+        customer_address: invoice.customer_address,
+        discount: invoice.discount,
+        tax: invoice.tax,
+        payment_type: invoice.payment_type,
+        currency_type: invoice.currency_type,
+        discount_type: invoice.discount_type,
+        advance_pay: invoice.advance_pay,
+        payment_method: invoice.payment_method,
+        products: invoice_products.map(item => ({
+          product_id: item.product.value,
+          unit_price: Number(item.unit_price),
+          quentity: Number(item.quentity),
+          unit_type: item.unit_type
+        }))
+      });
+      console.log(response.data);
+
+      if (response && response.data && response.data.success) {
+        navigate("/invoice-table");
+        toast.success(response.data.message || "Create Success.");
+      } else {
+        alert(response.data.message || "Field Error");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
 
   return (
@@ -45,7 +93,7 @@ const Create_Invoice = () => {
       <section className='container-fluid my-5'>
         <div className="row justify-content-center">
           <div className="col-md-12">
-            <form className='shadow-sm bg-light px-5 pt-3 pb-4'>
+            <form onSubmit={handleSubmit} className='shadow-sm bg-light px-5 pt-3 pb-4'>
               <h4 className='form_heading py-4'>Create Invoice</h4>
               <div className="row border-top border-warning pt-4">
 
