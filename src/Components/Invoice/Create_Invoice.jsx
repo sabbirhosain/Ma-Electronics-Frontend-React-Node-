@@ -15,7 +15,7 @@ const Create_Invoice = () => {
   const [loading, setLoading] = useState(false);
   const { invoice_products } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", currency_type: "BDT", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", total_due: "" });
+  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", total_due: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -61,7 +61,6 @@ const Create_Invoice = () => {
         discount: invoice.discount,
         tax: invoice.tax,
         payment_type: invoice.payment_type,
-        currency_type: invoice.currency_type,
         discount_type: invoice.discount_type,
         advance_pay: invoice.advance_pay,
         payment_method: invoice.payment_method,
@@ -72,7 +71,6 @@ const Create_Invoice = () => {
           unit_type: item.unit_type
         }))
       });
-      console.log(response.data);
 
       if (response && response.data && response.data.success) {
         navigate("/invoice-table");
@@ -158,6 +156,18 @@ const Create_Invoice = () => {
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Advance Pay :</label></div>
                     <div className="col-6"><input type="number" name='advance_pay' value={invoice.advance_pay} onChange={handleChange} min='0' className="form-control rounded-0" /></div>
+                  </div>
+
+                  <div className="row align-items-center mb-2">
+                    <div className="col-6"><label className='form-label d-block text-end'>Payment Types :</label></div>
+                    <div className="col-6">
+                      <select className="form-select rounded-0" name='payment_type' value={invoice.payment_type} onChange={handleChange}>
+                        <option value=''>Select Type</option>
+                        <option value='partial_payment'>Partial Payment</option>
+                        <option value='loan_payment'>Loan Payment</option>
+                        <option value='full_payment'>Full Payment</option>
+                      </select>
+                    </div>
                   </div>
 
                   <div className="row align-items-center mb-2">
