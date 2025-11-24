@@ -3,8 +3,8 @@ import Layout from '../../Layout/Layout'
 import { Link, useNavigate } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
 import Update_Product_Model from './Update_Product_Model';
-import Invoice_Product_Table from './Invoice_Product_Table';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
+import Invoice_Product_Create_Table from './Invoice_Product_Create_Table';
 import { create_invoice } from '../../api_base_routes';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -15,7 +15,7 @@ const Create_Invoice = () => {
   const [loading, setLoading] = useState(false);
   const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: new Date().toISOString().slice(0, 10), customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", total_due: "" });
+  const [invoice, setInvoice] = useState({ date_and_time: new Date().toISOString().slice(0, 10), customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", current_due: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -40,7 +40,7 @@ const Create_Invoice = () => {
       ...prev,
       total_price: total.toFixed(2),
       sub_total: subTotal.toFixed(2),
-      total_due: totalDue.toFixed(2)
+      current_due: totalDue.toFixed(2)
     }));
 
   }, [invoice_products, invoice.discount, invoice.discount_type, invoice.tax, invoice.advance_pay]);
@@ -122,7 +122,7 @@ const Create_Invoice = () => {
                     <h5 className='form_heading' style={{ fontSize: '18px' }}>Product List</h5>
                     <button type="button" className="btn btn-primary rounded-0 custom_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Product</button>
                   </div>
-                  <Invoice_Product_Table />
+                  <Invoice_Product_Create_Table />
                 </div>
               </div>
 
@@ -186,7 +186,7 @@ const Create_Invoice = () => {
 
                   <div className="row align-items-center">
                     <div className="col-6"><label className="form-label d-block text-end">Total Due :</label></div>
-                    <div className="col-6"><input type="text" value={invoice.total_due} className="form-control rounded-0 bg-danger text-white" readOnly /></div>
+                    <div className="col-6"><input type="text" value={invoice.current_due} className="form-control rounded-0 bg-danger text-white" readOnly /></div>
                   </div>
 
                 </div>

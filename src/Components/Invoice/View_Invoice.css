@@ -1,0 +1,11 @@
+.invoice_container {
+    font-family: var(--primary-fonts);
+    font-weight: 300;
+    padding: 50px 0;
+}
+
+.invoice_section_title {
+    font-size: 25px;
+    font-weight: 300;
+    margin: 0;
+}
