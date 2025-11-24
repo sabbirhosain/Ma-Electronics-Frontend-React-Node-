@@ -13,9 +13,9 @@ const Create_Invoice = () => {
 
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
-  const { invoice_products } = useInvoice_Context()
+  const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
-  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", total_due: "" });
+  const [invoice, setInvoice] = useState({ date_and_time: new Date().toISOString().slice(0, 10), customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", total_due: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -74,6 +74,8 @@ const Create_Invoice = () => {
 
       if (response && response.data && response.data.success) {
         navigate("/invoice-table");
+        setInvoice_Products([]);
+        setDisabledProducts([]);
         toast.success(response.data.message || "Create Success.");
       } else {
         alert(response.data.message || "Field Error");
@@ -97,22 +99,22 @@ const Create_Invoice = () => {
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Date and Time</label>
-                  <input type="date" name='date_and_time' value={invoice.date_and_time} onChange={handleChange} className='form-control rounded-0' />
+                  <input type="date" name='date_and_time' value={invoice.date_and_time} onChange={handleChange} className='form-control rounded-0' required />
                 </div>
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Customer Name</label>
-                  <input type="text" name='customer_name' value={invoice.customer_name} onChange={handleChange} className='form-control rounded-0' />
+                  <input type="text" name='customer_name' value={invoice.customer_name} onChange={handleChange} className='form-control rounded-0' required />
                 </div>
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Customer Phone</label>
-                  <input type="text" name='customer_phone' value={invoice.customer_phone} onChange={handleChange} className='form-control rounded-0' />
+                  <input type="text" name='customer_phone' value={invoice.customer_phone} onChange={handleChange} className='form-control rounded-0' required />
                 </div>
 
                 <div className="col-md-3 mb-3">
                   <label className='form-label'>Customer Address</label>
-                  <input type="text" name='customer_address' value={invoice.customer_address} onChange={handleChange} className='form-control rounded-0' />
+                  <input type="text" name='customer_address' value={invoice.customer_address} onChange={handleChange} className='form-control rounded-0' required />
                 </div>
 
                 <div className="col-12 mb-3">
@@ -134,7 +136,7 @@ const Create_Invoice = () => {
 
                   <div className="row align-items-center mb-2">
                     <div className="col-6"><label className="form-label d-block text-end">Discount :</label></div>
-                    <div className="col-4 pe-1"><input type="number" name='discount' value={invoice.discount} onChange={handleChange} min='0' max='100' className="form-control rounded-0" /></div>
+                    <div className="col-4 pe-1"><input type="number" name='discount' value={invoice.discount} onChange={handleChange} min='0' max={invoice.discount_type === 'percent' ? '100' : ''} className="form-control rounded-0" /></div>
                     <div className="col-2 ps-1">
                       <select className="form-select rounded-0" name='discount_type' value={invoice.discount_type} onChange={handleChange}>
                         <option value='amount'>Tk</option>

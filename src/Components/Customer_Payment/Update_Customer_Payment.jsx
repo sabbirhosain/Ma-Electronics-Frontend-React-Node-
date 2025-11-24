@@ -14,7 +14,7 @@ const Update_Customer_Payment = () => {
   const [error_message, setError_message] = useState({});
   const [customer_payment, setCustomer_Payment] = useState({ date_and_time: '', invoice_id: '', payable_amount: '', payment_method: '', payment_reference: '' })
   const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
-  const { invoice_filter, updateInvoiceFilterState, fetchInvoiceFilterData, invoice_options_select, invoice_options_search } = useInvoice_Context()
+  const { invoice_filter, updateInvoiceState, updateInvoiceFilterState, fetchInvoiceFilterData, invoice_options_select, invoice_options_search } = useInvoice_Context()
   useEffect(() => { fetchInvoiceFilterData(1) }, [invoice_filter.search]);
 
   const handleChange = (event) => {
