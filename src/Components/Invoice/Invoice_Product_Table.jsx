@@ -2,7 +2,7 @@ import { BiTrash } from 'react-icons/bi';
 import DataTable from 'react-data-table-component';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
 
-const Invoice_Product_Create_Table = () => {
+const Invoice_Product_Table = () => {
   const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context();
 
   const handleUpdate = (productValue, field, newValue) => {
@@ -65,4 +65,4 @@ const Invoice_Product_Create_Table = () => {
   );
 }
 
-export default Invoice_Product_Create_Table
+export default Invoice_Product_Table

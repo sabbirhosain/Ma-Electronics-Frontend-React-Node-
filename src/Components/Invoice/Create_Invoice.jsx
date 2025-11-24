@@ -4,7 +4,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
 import Update_Product_Model from './Update_Product_Model';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
-import Invoice_Product_Create_Table from './Invoice_Product_Create_Table';
+import Invoice_Product_Table from './Invoice_Product_Table';
 import { create_invoice } from '../../api_base_routes';
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -122,7 +122,7 @@ const Create_Invoice = () => {
                     <h5 className='form_heading' style={{ fontSize: '18px' }}>Product List</h5>
                     <button type="button" className="btn btn-primary rounded-0 custom_btn" data-bs-toggle="modal" data-bs-target="#exampleModal">Add New Product</button>
                   </div>
-                  <Invoice_Product_Create_Table />
+                  <Invoice_Product_Table />
                 </div>
               </div>
 

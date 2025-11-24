@@ -3,9 +3,9 @@ import Layout from '../../Layout/Layout'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
 import Update_Product_Model from './Update_Product_Model';
-import Invoice_Product_Table from './Invoice_Product_Table';
 import { single_invoice } from '../../api_base_routes';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
+import Invoice_Product_Table from './Invoice_Product_Table';
 import { toast } from 'react-toastify';
 import axios from 'axios';
 
@@ -70,16 +70,16 @@ const Update_Invoice = () => {
             tax: result.tax,
           });
 
-          // setInvoice_Products(
-          //   result.products.map(item => ({
-          //     product_id: item.product_id,
-          //     product_name: item.product_name,
-          //     unit_price: item.unit_price,
-          //     quentity: item.quentity,
-          //     unit_type: item.unit_type,
-          //     price: item.price
-          //   }))
-          // );
+          setInvoice_Products(
+            result.products.map(item => ({
+              id: item.id || item.product_id,
+              product: { value: item.product_id, label: item.product_name },
+              unit_price: item.unit_price,
+              quentity: item.quentity,
+              unit_type: item.unit_type,
+              price: item.price
+            }))
+          );
 
         }
       } catch (error) {
