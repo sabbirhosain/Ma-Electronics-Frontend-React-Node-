@@ -15,6 +15,7 @@ const Create_Invoice = () => {
   const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context()
   const [error_message, setError_message] = useState({});
   const [invoice, setInvoice] = useState({ date_and_time: new Date().toISOString().slice(0, 10), customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_type: "", payment_method: "", current_due: "" });
+  const resetFields = () => { setInvoice_Products([]); setDisabledProducts([]) };
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -193,7 +194,7 @@ const Create_Invoice = () => {
 
               <div className="d-flex align-items-center justify-content-end gap-2 mt-5">
                 <div className="col-md-2 mt-3">
-                  <Link to='/invoice-table' className='btn btn-danger rounded-0 w-100 custom_btn'>Cancel</Link>
+                  <Link to='/invoice-table' onClick={resetFields} className='btn btn-danger rounded-0 w-100 custom_btn'>Cancel</Link>
                 </div>
                 <div className="col-md-2 mt-3">
                   <button type="submit" className='btn btn-success rounded-0 w-100 custom_btn'>Create</button>

@@ -22,6 +22,8 @@ const Update_Invoice = () => {
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
 
+  const resetFields = () => { setInvoice_Products([]); setDisabledProducts([]) };
+
   useEffect(() => {
     const total = invoice_products.reduce((sum, item) => {
       return sum + Number(item.unit_price) * Number(item.quentity)
@@ -227,7 +229,7 @@ const Update_Invoice = () => {
 
               <div className="d-flex align-items-center justify-content-end gap-2 mt-5">
                 <div className="col-md-2 mt-3">
-                  <Link to='/invoice-table' className='btn btn-danger rounded-0 w-100 custom_btn'>Cancel</Link>
+                  <Link to='/invoice-table' onClick={resetFields} className='btn btn-danger rounded-0 w-100 custom_btn'>Cancel</Link>
                 </div>
                 <div className="col-md-2 mt-3">
                   <button type="submit" className='btn btn-success rounded-0 w-100 custom_btn'>Update</button>

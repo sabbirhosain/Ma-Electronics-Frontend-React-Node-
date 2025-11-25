@@ -28,6 +28,7 @@ import Update_Customer_Payment from "./Components/Customer_Payment/Update_Custom
 import Create_Expense from "./Components/Expense/Create_Expense"
 import Update_Expense from "./Components/Expense/Update_Expense"
 import './App.css'
+import Login_Page from "./Pages/Login_Page"
 
 const App = () => {
   // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -38,6 +39,7 @@ const App = () => {
       <ToastContainer position="top-right" autoClose={5000} />
       <Routes>
         <Route path="/" element={<Dashboard_Page />} />
+        <Route path="/admin/login" element={<Login_Page />} />
         <Route path="/unittype-table" element={<Unit_Type_page />} />
         <Route path="/unittype-create" element={<Create_Unit_Types />} />
         <Route path="/unittype-update/:id" element={<Update_Unit_Types />} />

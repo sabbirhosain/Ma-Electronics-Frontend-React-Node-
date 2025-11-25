@@ -42,6 +42,11 @@ const Product_Context = ({ children }) => {
   const products_options_select = (select) => { updateProductState({ options_value: select }) };
   const products_options_search = (search) => { updateProductState({ search: search }) };
 
+
+  const [products_filter, setProducts_Filter] = useState({ isLoading: false, data: [], pagination: null, search: '', error_message: null, options: [], options_value: null })
+  const updateProductsFilterState = (newState) => { setProducts(prev => ({ ...prev, ...newState })) };
+
+
   const deleteProduct = async (id) => {
     try {
       const confirm_delete = window.confirm('Are You Sure ? You Want to Delete!');
