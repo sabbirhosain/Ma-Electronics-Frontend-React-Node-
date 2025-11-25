@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout/Layout'
 import { Link, useNavigate } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
-import Update_Product_Model from './Update_Product_Model';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
 import Invoice_Product_Table from './Invoice_Product_Table';
 import { create_invoice } from '../../api_base_routes';
@@ -202,7 +201,6 @@ const Create_Invoice = () => {
               </div>
             </form>
             <Add_Product_Model />
-            <Update_Product_Model />
           </div>
         </div>
       </section>

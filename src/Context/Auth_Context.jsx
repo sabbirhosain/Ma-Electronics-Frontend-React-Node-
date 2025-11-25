@@ -1,7 +1,9 @@
-import React, { createContext, useContext } from 'react'
+import React, { createContext, useContext, useState } from 'react'
 
 const Auth_Context_Provider = createContext()
 const Auth_Context = ({ children }) => {
+
+    const [login_user, setLogin_User] = useState({ email: "", password: "" })
 
 
 

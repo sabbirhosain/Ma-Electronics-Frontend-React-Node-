@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react'
 import Layout from '../../Layout/Layout'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Add_Product_Model from './Add_Product_Model';
-import Update_Product_Model from './Update_Product_Model';
-import { single_invoice } from '../../api_base_routes';
+import { single_invoice, update_invoice } from '../../api_base_routes';
 import { useInvoice_Context } from '../../Context/Invoice_Context';
 import Invoice_Product_Table from './Invoice_Product_Table';
 import { toast } from 'react-toastify';
@@ -53,22 +52,7 @@ const Update_Invoice = () => {
         if (response && response.data) {
           const result = response.data.payload;
 
-          setInvoice({
-            date_and_time: result.date_and_time,
-            customer_name: result.customer_name,
-            customer_phone: result.customer_phone,
-            customer_address: result.customer_address,
-            total_price: result.subtotal,
-            currency_type: result.currency_type,
-            payment_type: result.payment_type,
-            payment_method: result.payment_method,
-            discount: result.discount,
-            discount_type: result.discount_type,
-            current_due: result.current_due,
-            advance_pay: result.advance_pay,
-            grand_total: result.grand_total,
-            tax: result.tax,
-          });
+          setInvoice({ date_and_time: result.date_and_time, customer_name: result.customer_name, customer_phone: result.customer_phone, customer_address: result.customer_address, total_price: result.subtotal, currency_type: result.currency_type, payment_type: result.payment_type, payment_method: result.payment_method, discount: result.discount, discount_type: result.discount_type, current_due: result.current_due, advance_pay: result.advance_pay, grand_total: result.grand_total, tax: result.tax });
 
           setInvoice_Products(
             result.products.map(item => ({
@@ -81,6 +65,8 @@ const Update_Invoice = () => {
             }))
           );
 
+          // Disable pre-selected products
+          setDisabledProducts(prev => [...prev, ...result.products.map(item => item.product_id)]);
         }
       } catch (error) {
         toast.error(error.response.data || 'Internal Server Error');
@@ -93,12 +79,54 @@ const Update_Invoice = () => {
   }, [id]);
 
 
+  // --- Form Submit ---
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    setLoading(true);
+    setError_message({});
+
+    try {
+      const response = await axios.put(`${update_invoice}${id}`, {
+        date_and_time: invoice.date_and_time,
+        customer_name: invoice.customer_name,
+        customer_phone: invoice.customer_phone,
+        customer_address: invoice.customer_address,
+        discount: invoice.discount,
+        tax: invoice.tax,
+        payment_type: invoice.payment_type,
+        discount_type: invoice.discount_type,
+        advance_pay: invoice.advance_pay,
+        payment_method: invoice.payment_method,
+        products: invoice_products.map(item => ({
+          product_id: item.product.value,
+          unit_price: Number(item.unit_price),
+          quentity: Number(item.quentity),
+          unit_type: item.unit_type
+        }))
+      });
+
+      if (response && response.data && response.data.success) {
+        navigate("/invoice-table");
+        setInvoice_Products([]);
+        setDisabledProducts([]);
+        toast.success(response.data.message || 'Update Success.')
+      } else {
+        alert(response.data.message || 'Field Error')
+      }
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false)
+    }
+  }
+
   return (
     <Layout>
       <section className='container-fluid my-5'>
         <div className="row justify-content-center">
           <div className="col-md-12">
-            <form className='shadow-sm bg-light px-5 pt-3 pb-4'>
+            <form onSubmit={handleSubmit} className='shadow-sm bg-light px-5 pt-3 pb-4'>
               <h4 className='form_heading py-4'>Update Invoice</h4>
               <div className="row border-top border-warning pt-4">
 
@@ -207,7 +235,6 @@ const Update_Invoice = () => {
               </div>
             </form>
             <Add_Product_Model />
-            <Update_Product_Model />
           </div>
         </div>
       </section>
