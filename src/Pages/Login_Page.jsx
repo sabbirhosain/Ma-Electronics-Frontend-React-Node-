@@ -1,14 +1,18 @@
-import { Link, useNavigate } from 'react-router-dom'
+import { useAuth_Context } from '../Context/Auth_Context';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
-import { CiUser } from 'react-icons/ci'
+import { Link, useNavigate } from 'react-router-dom'
+import { login_users } from '../api_base_routes';
 import { BiLogInCircle } from "react-icons/bi";
 import { MdLockPerson } from "react-icons/md";
-import { useState } from 'react';
-import { login_users } from '../api_base_routes';
+import { CiUser } from 'react-icons/ci'
 import { toast } from 'react-toastify';
+import { useState } from 'react';
+import Cookies from "js-cookie";
+import axios from 'axios';
 
 const Login_Page = () => {
   const navigate = useNavigate();
+  const { encryptData } = useAuth_Context()
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -34,13 +38,19 @@ const Login_Page = () => {
       });
 
       if (response && response.data && response.data.success) {
+        Cookies.set("root", encryptData(JSON.stringify(response.data.payload)), {
+          expires: 1 / 1440,  // 1 minute
+          secure: true,       // HTTPS required
+          sameSite: "Strict"  // Prevent CSRF
+        });
+
         navigate("/");
         toast.success(response.data.message || "Login Success.");
-      } else {
-        alert(response.data.message || "Field Error");
       }
+
     } catch (error) {
-      console.log(error);
+      console.log(error.response);
+      setError_message(error.response.data)
     } finally {
       setLoading(false);
     }
@@ -56,15 +66,16 @@ const Login_Page = () => {
                 <div className="col-md-12 mb-3">
                   <label className='form-label'>Email or Phone</label>
                   <div className='position-relative'>
-                    <input type="text" className='form-control rounded-0 ps-5' disabled={loading} required />
+                    <input type="text" name='user_name' className='form-control rounded-0 ps-5' onChange={handleChange} placeholder='Sabbir Hosain' disabled={loading} required />
                     <CiUser className='login_user_icon' />
                   </div>
                 </div>
                 <div className="col-md-12 mb-3">
                   <label className='form-label'>Password</label>
                   <div className='position-relative'>
-                    <input type={showPassword ? "text" : "password"} className='form-control rounded-0 ps-5' disabled={loading} required />
+                    <input type={showPassword ? "text" : "password"} name='password' onChange={handleChange} className='form-control rounded-0 ps-5' placeholder='****' disabled={loading} required />
                     <button type="button" className='password_show_btn' onClick={passwordShowToggle}>{showPassword ? <FaRegEye /> : <FaRegEyeSlash />}</button>
+                    <small className='text-danger d-block mt-1'>{error_message.message}</small>
                     <MdLockPerson className='login_lock_icon' />
                   </div>
                 </div>

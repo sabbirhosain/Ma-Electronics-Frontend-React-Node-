@@ -1,4 +1,4 @@
-export const login_users = import.meta.env.VITE_API_URL + "/api/v1/account/web/login";
+export const login_users = import.meta.env.VITE_API_URL + "/api/v1/account/mobile/login";
 
 export const create_unittype = import.meta.env.VITE_API_URL + "/api/v1/items/unit-type";
 export const show_unittype = import.meta.env.VITE_API_URL + "/api/v1/items/unit-type";
