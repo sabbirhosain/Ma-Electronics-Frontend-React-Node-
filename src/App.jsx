@@ -1,5 +1,6 @@
 import "bootstrap/dist/css/bootstrap.min.css"
 import "bootstrap/dist/js/bootstrap.bundle.js"
+import { useAuth_Context } from "./Context/Auth_Context"
 import axios from "axios"
 import { ToastContainer } from "react-toastify"
 import { Route, Routes } from "react-router-dom"
@@ -32,7 +33,8 @@ import Login_Page from "./Pages/Login_Page"
 import './App.css'
 
 const App = () => {
-  // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
+  const { auth } = useAuth_Context()
+  axios.defaults.headers.common['Authorization'] = `Bearer ${auth.access}`;
   axios.defaults.headers.post['Content-Type'] = 'application/json';
 
   return (

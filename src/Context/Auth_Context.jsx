@@ -64,7 +64,7 @@ const Auth_Context = ({ children }) => {
         setAuthLoading(false);
     }, []);
 
-
+    
     return (
         <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading }}>
             {children}
