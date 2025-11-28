@@ -27,8 +27,9 @@ import Create_Customer_Payment from "./Components/Customer_Payment/Create_Custom
 import Update_Customer_Payment from "./Components/Customer_Payment/Update_Customer_Payment"
 import Create_Expense from "./Components/Expense/Create_Expense"
 import Update_Expense from "./Components/Expense/Update_Expense"
-import './App.css'
+import Protected_Route from "./Layout/Protected_Route"
 import Login_Page from "./Pages/Login_Page"
+import './App.css'
 
 const App = () => {
   // axios.defaults.headers.common['Authorization'] = AUTH_TOKEN;
@@ -38,31 +39,33 @@ const App = () => {
     <>
       <ToastContainer position="top-right" autoClose={5000} />
       <Routes>
-        <Route path="/" element={<Dashboard_Page />} />
         <Route path="/admin/login" element={<Login_Page />} />
-        <Route path="/unittype-table" element={<Unit_Type_page />} />
-        <Route path="/unittype-create" element={<Create_Unit_Types />} />
-        <Route path="/unittype-update/:id" element={<Update_Unit_Types />} />
-        <Route path="/categories-table" element={<Categories_Page />} />
-        <Route path="/categories-create" element={<Create_Categories />} />
-        <Route path="/categories-update/:id" element={<Update_Categories />} />
-        <Route path="/product-table" element={<Products_Page />} />
-        <Route path="/product-create" element={<Create_Product />} />
-        <Route path="/product-update/:id" element={<Update_Product />} />
-        <Route path="/purchase-table" element={<Purchase_Page />} />
-        <Route path="/purchase-create" element={<Create_Purchase />} />
-        <Route path="/purchase-update/:id" element={<Update_Purchase />} />
-        <Route path="/invoice-table" element={<Invoice_Page />} />
-        <Route path="/invoice-create" element={<Create_Invoice />} />
-        <Route path="/invoice-view/:id" element={<View_Invoice />} />
-        <Route path="/invoice-update/:id" element={<Update_Invoice />} />
-        <Route path="/customer-payment-create" element={<Create_Customer_Payment />} />
-        <Route path="/customer-payment-update/:id" element={<Update_Customer_Payment />} />
-        <Route path="/customer-payment-table" element={<Customer_Payment_Pages />} />
-        <Route path="/expense-table" element={<Expense_Page />} />
-        <Route path="/expense-create" element={<Create_Expense />} />
-        <Route path="/expense-update/:id" element={<Update_Expense />} />
-        <Route path="/profile-settings" element={<Settings_Page />} />
+        <Route element={<Protected_Route />}>
+          <Route path="/" element={<Dashboard_Page />} />
+          <Route path="/unittype-table" element={<Unit_Type_page />} />
+          <Route path="/unittype-create" element={<Create_Unit_Types />} />
+          <Route path="/unittype-update/:id" element={<Update_Unit_Types />} />
+          <Route path="/categories-table" element={<Categories_Page />} />
+          <Route path="/categories-create" element={<Create_Categories />} />
+          <Route path="/categories-update/:id" element={<Update_Categories />} />
+          <Route path="/product-table" element={<Products_Page />} />
+          <Route path="/product-create" element={<Create_Product />} />
+          <Route path="/product-update/:id" element={<Update_Product />} />
+          <Route path="/purchase-table" element={<Purchase_Page />} />
+          <Route path="/purchase-create" element={<Create_Purchase />} />
+          <Route path="/purchase-update/:id" element={<Update_Purchase />} />
+          <Route path="/invoice-table" element={<Invoice_Page />} />
+          <Route path="/invoice-create" element={<Create_Invoice />} />
+          <Route path="/invoice-view/:id" element={<View_Invoice />} />
+          <Route path="/invoice-update/:id" element={<Update_Invoice />} />
+          <Route path="/customer-payment-create" element={<Create_Customer_Payment />} />
+          <Route path="/customer-payment-update/:id" element={<Update_Customer_Payment />} />
+          <Route path="/customer-payment-table" element={<Customer_Payment_Pages />} />
+          <Route path="/expense-table" element={<Expense_Page />} />
+          <Route path="/expense-create" element={<Create_Expense />} />
+          <Route path="/expense-update/:id" element={<Update_Expense />} />
+          <Route path="/profile-settings" element={<Settings_Page />} />
+        </Route>
       </Routes>
     </>
   )

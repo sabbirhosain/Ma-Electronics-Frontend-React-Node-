@@ -1,7 +1,7 @@
 import { useAuth_Context } from '../Context/Auth_Context';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa'
-import { Link, useNavigate } from 'react-router-dom'
 import { login_users } from '../api_base_routes';
+import { Navigate, useNavigate } from 'react-router-dom';
 import { BiLogInCircle } from "react-icons/bi";
 import { MdLockPerson } from "react-icons/md";
 import { CiUser } from 'react-icons/ci'
@@ -11,8 +11,8 @@ import Cookies from "js-cookie";
 import axios from 'axios';
 
 const Login_Page = () => {
-  const navigate = useNavigate();
-  const { encryptData } = useAuth_Context()
+  const navigate = useNavigate()
+  const { encryptData, auth, setAuth, isTokenExpired } = useAuth_Context()
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
   const [showPassword, setShowPassword] = useState(false);
@@ -24,6 +24,11 @@ const Login_Page = () => {
     setUsers((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
     setError_message((prev) => ({ ...prev, [name]: null })); // remove error if input
   };
+
+  // if user is login auto redirect dashboard route
+  if (auth.access && !isTokenExpired(auth.access)) {
+    return <Navigate to="/" replace />;
+  }
 
   // --- Form Submit ---
   const handleSubmit = async (event) => {
@@ -38,19 +43,22 @@ const Login_Page = () => {
       });
 
       if (response && response.data && response.data.success) {
-        Cookies.set("root", encryptData(JSON.stringify(response.data.payload)), {
-          expires: 1 / 1440,  // 1 minute
-          secure: true,       // HTTPS required
-          sameSite: "Strict"  // Prevent CSRF
-        });
 
-        navigate("/");
+        const payload = response.data.payload;
+        const encrypted = encryptData(payload);
+        if (encrypted) { Cookies.set("root", encrypted, { secure: true, sameSite: "Strict" }) }
+        setAuth({ user: payload.user, access: payload.access, refresh: payload.refresh, store_name: payload.store_name });
+
+        navigate("/", { replace: true });
         toast.success(response.data.message || "Login Success.");
       }
 
     } catch (error) {
-      console.log(error.response);
-      setError_message(error.response.data)
+      Cookies.remove('root');
+      console.error(error.response);
+      setError_message(error.response.data || { message: 'Login failed' });
+      setAuth({ user: null, access: null, refresh: null, store_name: null });
+
     } finally {
       setLoading(false);
     }
