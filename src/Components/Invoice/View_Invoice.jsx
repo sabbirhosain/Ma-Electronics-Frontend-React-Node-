@@ -13,7 +13,6 @@ const View_Invoice = () => {
   const [loading, setLoading] = useState(false)
   const [error_message, setError_message] = useState({});
   const [invoice, setInvoice] = useState([]);
-  console.log(invoice);
 
   useEffect(() => {
     const getInvoice = async () => {
@@ -33,7 +32,6 @@ const View_Invoice = () => {
     }
     getInvoice()
   }, [id]);
-
 
 
   return (
