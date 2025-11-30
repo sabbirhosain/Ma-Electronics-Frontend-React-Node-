@@ -20,7 +20,6 @@ const Auth_Context = ({ children }) => {
         }
     };
 
-    // decrypt cookie data
     const decryptData = (encryptedData) => {
         try {
             if (!encryptedData) { console.log("No data found to decrypt."); return null }

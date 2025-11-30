@@ -1,6 +1,6 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
-import { delete_products, show_products } from "../api_base_routes";
+import { delete_products, show_products, show_products_filter } from "../api_base_routes";
 import { useCategories_Context } from "./Categories_Context";
 import { toast } from "react-toastify";
 
@@ -38,14 +38,34 @@ const Product_Context = ({ children }) => {
     }
   }
 
-  // ===== for react select dropdown ==========
-  const products_options_select = (select) => { updateProductState({ options_value: select }) };
-  const products_options_search = (search) => { updateProductState({ search: search }) };
-
-
   const [products_filter, setProducts_Filter] = useState({ isLoading: false, data: [], pagination: null, search: '', error_message: null, options: [], options_value: null })
-  const updateProductsFilterState = (newState) => { setProducts(prev => ({ ...prev, ...newState })) };
+  const updateProductsFilterState = (newState) => { setProducts_Filter(prev => ({ ...prev, ...newState })) };
 
+  const fetchProductsFilterData = async (page) => {
+    try {
+      updateProductsFilterState({ isLoading: true, error_message: null });
+      const response = await axios.get(show_products_filter, {
+        params: { search: products.search, page: page }
+      })
+
+      if (response && response.data) {
+        const data = response.data.payload || [];
+        updateProductsFilterState({
+          data: data, pagination: response.data.pagination || null,
+          options: data.map(item => ({ value: item._id, label: item.product_details })),
+        });
+      }
+
+    } catch (error) {
+      console.log(error);
+    } finally {
+      updateProductsFilterState({ isLoading: false });
+    }
+  }
+
+  // ===== for react select dropdown ==========
+  const products_options_select = (select) => { updateProductsFilterState({ options_value: select }) };
+  const products_options_search = (search) => { updateProductsFilterState({ search: search }) };
 
   const deleteProduct = async (id) => {
     try {
@@ -72,7 +92,7 @@ const Product_Context = ({ children }) => {
 
 
   return (
-    <Product_Context_Provider.Provider value={{ products, updateProductState, fetchProductsData, products_options_select, products_options_search, deleteProduct }}>
+    <Product_Context_Provider.Provider value={{ products, updateProductState, fetchProductsData, products_options_select, products_options_search, products_filter, updateProductsFilterState, fetchProductsFilterData, deleteProduct }}>
       {children}
     </Product_Context_Provider.Provider>
   );
