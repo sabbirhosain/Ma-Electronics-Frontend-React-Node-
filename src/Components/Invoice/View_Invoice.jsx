@@ -84,16 +84,52 @@ const View_Invoice = () => {
                       <td>{item.price}</td>
                     </tr>
                   ))
-                ) : (<tr> <td colSpan="6" className="text-center">No Products Found</td> </tr>)}
+                ) : <span className="text-center d-block">No Products Found</span>}
               </tbody>
             </table>
 
+            <div className="row justify-content-end">
+              <div className="col-md-4">
+                <ol className="list-group rounded-0">
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Sub Total</span>
+                    <span>{invoice.subtotal} {invoice.currency_type}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Discount</span>
+                    <span>{invoice.discount} {invoice.discount_type === 'amount' ? 'Tk' : '%'}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Tax</span>
+                    <span>{invoice.tax} Tk</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Grand Total</span>
+                    <span>{invoice.grand_total}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Advance Pay</span>
+                    <span>{invoice.advance_pay}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Payment Type</span>
+                    <span>{invoice.payment_type}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Payment Method</span>
+                    <span>{invoice.payment_method}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center bg-danger text-white">
+                    <span>Current Due</span>
+                    <span>{invoice.current_due}</span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+
             <div className="invoice_footer_note mt-4">
               <p>Thank you for your business!</p>
-              <p className="text-muted mb-0">
-                This is a system-generated invoice and does not require a
-                signature.
-              </p>
+              <p className="text-muted mb-0">This is a system-generated invoice and does not require a signature.</p>
             </div>
 
           </div>
