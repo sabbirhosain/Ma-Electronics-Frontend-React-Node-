@@ -129,15 +129,15 @@ const Create_Invoice = () => {
               <div className="row justify-content-end mt-3">
                 <div className="col-md-5">
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className="form-label d-block text-end">Total Price :</label></div>
-                    <div className="col-4 pe-1"><input type="text" value={invoice.total_price || 0} className="form-control rounded-0" readOnly disabled={loading} /></div>
-                    <div className="col-2 ps-1"><input type="text" value='TK' className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Total Price :</label></div>
+                    <div className="col-md-4 col-6 pe-1"><input type="text" value={invoice.total_price || 0} className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-2 col-6 ps-1"><input type="text" value='TK' className="form-control rounded-0" readOnly disabled={loading} /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className="form-label d-block text-end">Discount :</label></div>
-                    <div className="col-4 pe-1"><input type="number" name='discount' value={invoice.discount} onChange={handleChange} min='0' max={invoice.discount_type === 'percent' ? '100' : ''} className="form-control rounded-0" disabled={loading} /></div>
-                    <div className="col-2 ps-1">
+                    <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Discount :</label></div>
+                    <div className="col-md-4 col-6 pe-1"><input type="number" name='discount' value={invoice.discount} onChange={handleChange} min='0' max={invoice.discount_type === 'percent' ? '100' : ''} className="form-control rounded-0" disabled={loading} /></div>
+                    <div className="col-md-2 col-6 ps-1">
                       <select className="form-select rounded-0" name='discount_type' value={invoice.discount_type} onChange={handleChange} disabled={loading}>
                         <option value='amount'>Tk</option>
                         <option value='percent'>%</option>
@@ -146,23 +146,23 @@ const Create_Invoice = () => {
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className="form-label d-block text-end">Tax :</label></div>
-                    <div className="col-6"><input type="number" name='tax' value={invoice.tax} onChange={handleChange} min='0' className="form-control rounded-0" disabled={loading} /></div>
+                    <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Tax :</label></div>
+                    <div className="col-md-6 col-12"><input type="number" name='tax' value={invoice.tax} onChange={handleChange} min='0' className="form-control rounded-0" disabled={loading} /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className="form-label d-block text-end">Sub Total :</label></div>
-                    <div className="col-6"><input type="text" value={invoice.sub_total} className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Sub Total :</label></div>
+                    <div className="col-md-6 col-12"><input type="text" value={invoice.sub_total} className="form-control rounded-0" readOnly disabled={loading} /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className="form-label d-block text-end">Advance Pay :</label></div>
-                    <div className="col-6"><input type="number" name='advance_pay' value={invoice.advance_pay} onChange={handleChange} min='0' className="form-control rounded-0" disabled={loading} /></div>
+                    <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Advance Pay :</label></div>
+                    <div className="col-md-6 col-12"><input type="number" name='advance_pay' value={invoice.advance_pay} onChange={handleChange} min='0' className="form-control rounded-0" disabled={loading} /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className='form-label d-block text-end'>Payment Types :</label></div>
-                    <div className="col-6">
+                    <div className="col-md-6 col-12"><label className='form-label d-block text-md-end'>Payment Types :</label></div>
+                    <div className="col-md-6 col-12">
                       <select className="form-select rounded-0" name='payment_type' value={invoice.payment_type} onChange={handleChange} disabled={loading}>
                         <option value=''>Select Type</option>
                         <option value='partial_payment'>Partial Payment</option>
@@ -173,8 +173,8 @@ const Create_Invoice = () => {
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-6"><label className='form-label d-block text-end'>Payment Method :</label></div>
-                    <div className="col-6">
+                    <div className="col-md-6 col-12"><label className='form-label d-block text-md-end'>Payment Method :</label></div>
+                    <div className="col-md-6 col-12">
                       <select className="form-select rounded-0" name='payment_method' value={invoice.payment_method} onChange={handleChange} disabled={loading}>
                         <option value=''>Select Method</option>
                         <option value='cash'>Cash</option>
@@ -185,18 +185,18 @@ const Create_Invoice = () => {
                   </div>
 
                   <div className="row align-items-center">
-                    <div className="col-6"><label className="form-label d-block text-end">Total Due :</label></div>
-                    <div className="col-6"><input type="text" value={invoice.current_due} className="form-control rounded-0 bg-danger text-white" readOnly disabled={loading} /></div>
+                    <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Total Due :</label></div>
+                    <div className="col-md-6 col-12"><input type="text" value={invoice.current_due} className="form-control rounded-0 bg-danger text-white" readOnly disabled={loading} /></div>
                   </div>
 
                 </div>
               </div>
 
               <div className="d-flex align-items-center justify-content-end gap-2 mt-5">
-                <div className="col-md-2 mt-3">
+                <div className="col-md-2 col-6 mt-3">
                   <Link to='/invoice-table' onClick={resetFields} className='btn btn-danger rounded-0 w-100 custom_btn'>Cancel</Link>
                 </div>
-                <div className="col-md-2 mt-3">
+                <div className="col-md-2 col-6 mt-3">
                   <button type="submit" className='btn btn-success rounded-0 w-100 custom_btn'>{loading ? "Please Wait" : "Create"}</button>
                 </div>
               </div>
