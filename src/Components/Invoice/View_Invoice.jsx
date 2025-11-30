@@ -39,11 +39,12 @@ const View_Invoice = () => {
   return (
     <Layout>
       <section className='container invoice_container'>
-        <div className="row">
+        <div className="row border p-3">
           <div className="col-md-12">
             <div className="row align-items-center border-bottom pb-3">
               <div className="col-md-6">
-                <h2 className='invoice_section_title'>Invoice</h2>
+                <span className='d-block'>Ma electronics</span>
+                <span className='d-block'>Jamnagar Bazar, Bagatipara, Natore</span>
               </div>
               <div className="col-md-6">
                 <div className="d-flex align-items-center justify-content-end gap-3">
@@ -56,6 +57,47 @@ const View_Invoice = () => {
                 </div>
               </div>
             </div>
+
+            <div className="row mt-4">
+              <div className="col-md-6">
+                <strong className='d-block'>Pay To:</strong>
+                <span className='d-block'>Customer Name : {invoice.customer_name}</span>
+                <span className='d-block'>Customer Phone : {invoice.customer_phone}</span>
+                <span className='d-block'>Customer Address : {invoice.customer_address}</span>
+              </div>
+            </div>
+
+            <table className="table border mt-5">
+              <thead>
+                <tr>
+                  <th scope="col" className="table-dark">Product Name</th>
+                  <th scope="col" className="table-dark">Quentity</th>
+                  <th scope="col" className="table-dark">Unit Price</th>
+                  <th scope="col" className="table-dark">Price</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoice.products && invoice.products.length > 0 ? (
+                  invoice.products.map((item, index) => (
+                    <tr key={index}>
+                      <td>{item.product_name}</td>
+                      <td>{item.quentity + ' - ' + item.unit_type}</td>
+                      <td>{item.unit_price}</td>
+                      <td>{item.price}</td>
+                    </tr>
+                  ))
+                ) : (<tr> <td colSpan="6" className="text-center">No Products Found</td> </tr>)}
+              </tbody>
+            </table>
+
+            <div className="invoice_footer_note mt-4">
+              <p>Thank you for your business!</p>
+              <p className="text-muted mb-0">
+                This is a system-generated invoice and does not require a
+                signature.
+              </p>
+            </div>
+
           </div>
         </div>
       </section>

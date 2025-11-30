@@ -9,3 +9,11 @@
     font-weight: 300;
     margin: 0;
 }
+
+.invoice_footer_note {
+    text-align: center;
+    border-top: 1px dashed #ddd;
+    padding-top: 15px;
+    margin-top: 15px;
+    font-size: 13px;
+}
