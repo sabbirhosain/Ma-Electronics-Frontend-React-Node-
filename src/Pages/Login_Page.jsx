@@ -43,7 +43,6 @@ const Login_Page = () => {
       });
 
       if (response && response.data && response.data.success) {
-
         const payload = response.data.payload;
         const encrypted = encryptData(payload);
         if (encrypted) { Cookies.set("root", encrypted, { secure: true, sameSite: "Strict" }) }

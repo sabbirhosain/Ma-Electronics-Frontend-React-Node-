@@ -1,10 +1,12 @@
 import React from 'react'
 import Layout from '../Layout/Layout'
 import Table_Customer_Payment from '../Components/Customer_Payment/Table_Customer_Payment'
+import { useCustomer_Payment_Context } from '../Context/Customer_Payment_Context'
 import { MdFormatListBulletedAdd } from 'react-icons/md'
 import { Link } from 'react-router-dom'
 
 const Customer_Payment_Pages = () => {
+  const { updateCustomerPaymentState } = useCustomer_Payment_Context()
   return (
     <Layout>
       <section className=''>
@@ -17,7 +19,7 @@ const Customer_Payment_Pages = () => {
           <div className="col-md-9"></div>
           <div className="col-md-3">
             <div className='w-100'>
-              <input type="search" onChange={(event) => updateCategoriesState({ search: event.target.value })} className="form-control rounded-0" placeholder="Search Hear..." />
+              <input type="search" onChange={(event) => updateCustomerPaymentState({ search: event.target.value })} className="form-control rounded-0" placeholder="Search Hear..." />
             </div>
           </div>
         </div>
