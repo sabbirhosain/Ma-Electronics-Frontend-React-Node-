@@ -1,7 +1,7 @@
 import axios from "axios";
 import { createContext, useContext, useState } from "react";
 import { toast } from "react-toastify";
-import { show_customer_payment } from "../api_base_routes";
+import { delete_customer_payment, show_customer_payment } from "../api_base_routes";
 
 const Customer_Payment_Context_Provider = createContext();
 
@@ -31,10 +31,31 @@ const Customer_Payment_Context = ({ children }) => {
         }
     }
 
+    const deleteCustomerPayment = async (id) => {
+        try {
+            const confirm_delete = window.confirm('Are You Sure ? You Want to Delete!');
+            if (!confirm_delete) return;
+
+            updateCustomerPaymentState({ isLoading: true });
+            const response = await axios.delete(`${delete_customer_payment}${id}`);
+            if (response && response.data && response.data.success) {
+                fetchCustomerPaymentData(1)
+                toast.success(response.data.message || 'Delete Success.')
+            } else {
+                alert(response.data.message || 'Field Error')
+            }
+
+        } catch (error) {
+            console.log('Internal Server Error', error);
+
+        } finally {
+            updateCustomerPaymentState({ isLoading: false });
+        }
+    }
 
 
     return (
-        <Customer_Payment_Context_Provider.Provider value={{ customer_payment, updateCustomerPaymentState, fetchCustomerPaymentData }}>
+        <Customer_Payment_Context_Provider.Provider value={{ customer_payment, updateCustomerPaymentState, fetchCustomerPaymentData, deleteCustomerPayment }}>
             {children}
         </Customer_Payment_Context_Provider.Provider>
     )

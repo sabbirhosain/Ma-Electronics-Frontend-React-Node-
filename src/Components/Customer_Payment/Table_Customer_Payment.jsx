@@ -5,7 +5,7 @@ import DataTable from 'react-data-table-component';
 import { useCustomer_Payment_Context } from '../../Context/Customer_Payment_Context';
 
 const Table_Customer_Payment = () => {
-  const { customer_payment, fetchCustomerPaymentData } = useCustomer_Payment_Context()
+  const { customer_payment, fetchCustomerPaymentData, deleteCustomerPayment } = useCustomer_Payment_Context()
   useEffect(() => { fetchCustomerPaymentData(1) }, [customer_payment.search]);
   const onPageChange = (page) => { fetchCustomerPaymentData(page) }; // data table page change
 
@@ -51,7 +51,7 @@ const Table_Customer_Payment = () => {
       name: "Action",
       cell: row => <div className="d-flex align-items-center gap-2">
         <Link to={`/customer-payment-update/${row._id}`} className="btn btn-outline-success rounded-0 btn-sm"><BiEditAlt /></Link>
-        <button type="button" onClick={() => deleteCategory(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
+        <button type="button" onClick={() => deleteCustomerPayment(row._id)} className="btn btn-outline-danger rounded-0 btn-sm"><BiTrash /></button>
       </div>,
       width: "150px"
     }

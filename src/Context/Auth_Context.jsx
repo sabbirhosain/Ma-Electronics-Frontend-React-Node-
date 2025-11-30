@@ -64,9 +64,16 @@ const Auth_Context = ({ children }) => {
         setAuthLoading(false);
     }, []);
 
-    
+    const logout = () => {
+        const confirm_logout = window.confirm('Are You Sure ? You Want to Logout!');
+        if (!confirm_logout) return;
+
+        Cookies.remove("root");
+        setAuth({ user: null, access: null, refresh: null, store_name: null });
+    };
+
     return (
-        <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading }}>
+        <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading, logout }}>
             {children}
         </Auth_Context_Provider.Provider>
     )

@@ -5,8 +5,10 @@ import { CgProfile } from "react-icons/cg";
 import { SlSettings } from "react-icons/sl";
 import { FaUserCircle } from "react-icons/fa";
 import "./Header_Sidebar_Style.css";
+import { useAuth_Context } from "../../Context/Auth_Context";
 
 const Header = () => {
+  const { logout } = useAuth_Context()
   return (
     <div className="navbar_top">
       <div className="container-fluid pe-md-5">
@@ -21,13 +23,12 @@ const Header = () => {
               <button type="button" className="btn btn-outline-dark rounded-0 dropdown-toggle d-flex align-items-center justify-content-center" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" ><FaUserCircle /></button>
 
               <ul className="dropdown-menu dropdown-menu-end mt-2 py-0 rounded-0">
-                <li><button type="button" className="dropdown-item d-flex align-items-center gap-2"><BiLogOut />Logout</button></li>
+                <li><button type="button" className="dropdown-item d-flex align-items-center gap-2" onClick={() => logout()}><BiLogOut />Logout</button></li>
                 <hr className="dropdown-divider p-0 m-0" />
                 <li><Link to='#' className="dropdown-item d-flex align-items-center gap-2"><CgProfile />Profile</Link></li>
                 <hr className="dropdown-divider p-0 m-0" />
                 <li> <Link to={"/settings"} className="dropdown-item d-flex align-items-center gap-2" ><SlSettings />Setting</Link></li>
               </ul>
-
             </div>
           </div>
         </div>
