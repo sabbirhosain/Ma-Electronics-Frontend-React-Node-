@@ -11,6 +11,7 @@ import Invoice_Context from './Context/Invoice_Context.jsx'
 import Customer_Payment_Context from './Context/Customer_Payment_Context.jsx'
 import Expense_Context from './Context/Expense_Context.jsx'
 import Auth_Context from './Context/Auth_Context.jsx'
+import Dashboard_Context from './Context/Dashboard_Context.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
@@ -23,7 +24,9 @@ createRoot(document.getElementById('root')).render(
                 <Invoice_Context>
                   <Customer_Payment_Context>
                     <Expense_Context>
-                      <App />
+                      <Dashboard_Context>
+                        <App />
+                      </Dashboard_Context>
                     </Expense_Context>
                   </Customer_Payment_Context>
                 </Invoice_Context>

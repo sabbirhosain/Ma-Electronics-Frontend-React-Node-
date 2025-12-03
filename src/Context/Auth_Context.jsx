@@ -53,7 +53,7 @@ const Auth_Context = ({ children }) => {
             return;
         }
 
-        const data = decryptData(token);
+        const data = decryptData(token);        
         if (data && data.access && !isTokenExpired(data.access)) {
             setAuth({ user: data.user, access: data.access, refresh: data.refresh, store_name: data.store_name });
         } else {

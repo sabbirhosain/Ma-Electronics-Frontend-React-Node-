@@ -44,3 +44,5 @@ export const show_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expens
 export const single_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";
 export const update_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";
 export const delete_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";
+
+export const show_dashboard = import.meta.env.VITE_API_URL + "/api/v1/dashboard/today-stats";
