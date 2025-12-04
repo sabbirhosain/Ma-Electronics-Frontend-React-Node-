@@ -35,6 +35,7 @@
     padding: 20px;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     background-color: rgb(234, 248, 234);
+    position: relative;
 }
 
 .dashboard_card_title {
@@ -45,6 +46,18 @@
     text-transform: capitalize;
     letter-spacing: 1px;
     margin: 0px;
+}
+
+.dashboard_card_badge {
+    top: 0;
+    right: 0;
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    padding: 2px 5px;
+    letter-spacing: 1px;
+    font-family: var(--primary-fonts);
+    background-color: var(--primary-color);
 }
 
 .dashboard_card_count {
