@@ -14,37 +14,37 @@ const Dashboard_Page = () => {
           <div className="row mt-4">
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.net_profit_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.net_profit_today}</h1>
                 <h6 className='dashboard_card_title'>Net Profit</h6>
               </div>
             </div>
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.total_cash_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_cash_today}</h1>
                 <h6 className='dashboard_card_title'>Total Cash</h6>
               </div>
             </div>
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.total_expense_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_expense_today}</h1>
                 <h6 className='dashboard_card_title'>Total Expense</h6>
               </div>
             </div>
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.total_products}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_products}</h1>
                 <h6 className='dashboard_card_title'>Total Products</h6>
               </div>
             </div>
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.total_purchase_quantity_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_purchase_quantity_today}</h1>
                 <h6 className='dashboard_card_title'>Total Purchase</h6>
               </div>
             </div>
             <div className="col-md-3 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.total_sell_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_sell_today}</h1>
                 <h6 className='dashboard_card_title'>Total Sell</h6>
               </div>
             </div>
