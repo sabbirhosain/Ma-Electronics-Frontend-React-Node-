@@ -1,14 +1,21 @@
+import { useInvoice_Context } from "../../Context/Invoice_Context";
 import { BiMessageDetail } from "react-icons/bi";
 import { TiCancelOutline } from "react-icons/ti";
 import { RxReset } from "react-icons/rx";
 import Layout from '../../Layout/Layout'
 import { Link } from "react-router-dom";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import Select from 'react-select'
 
 const Send_Message = () => {
     const [loading, setLoading] = useState(false);
     const [error_message, setError_message] = useState({});
     const [customer_message, setCustomer_Message] = useState({ person_number: "", message_type: "", message_text: "", message_checkbox: false });
+    const customStyles = { control: (styles) => ({ ...styles, backgroundColor: 'white', border: "1px solid #dee2e6", borderRadius: "0px", fontFamily: "Poppins, sans-serif" }) };
+    const { invoice_filter, updateInvoiceFilterState, fetchInvoiceFilterData, invoice_options_select, invoice_options_search } = useInvoice_Context()
+    useEffect(() => { fetchInvoiceFilterData(1) }, [invoice_filter.search]);
+
+
     const handleChange = (event) => {
         const { name, value, files, type } = event.target;
         setCustomer_Message((prev) => ({ ...prev, [name]: type === "file" ? files[0] : value.trim() }));
@@ -26,14 +33,18 @@ const Send_Message = () => {
                                 <div className="row">
                                     <div className="col-md-12 mb-3">
                                         <label className='form-label'>Select Person</label>
-                                        <select className="form-select rounded-0">
-                                            <option value=''>Select</option>
-                                            <option value='paid'>Sabbir Hosain - 01793273702</option>
-                                            <option value='paid'>Moinul Islam - 01793273702</option>
-                                            <option value='paid'>Raisul Islam - 01793273702</option>
-                                            <option value='paid'>Golam Rabbi - 01793273702</option>
-                                            <option value='paid'>Aynal Hosain - 01793273702</option>
-                                        </select>
+                                        <Select
+                                            options={invoice_filter.options}
+                                            value={invoice_filter.options_value}
+                                            onChange={invoice_options_select}
+                                            onInputChange={invoice_options_search}
+                                            isLoading={invoice_filter.isLoading}
+                                            placeholder={invoice_filter.isLoading ? "Loading..." : "Select Invoice"}
+                                            isClearable={true}
+                                            styles={customStyles}
+                                            maxMenuHeight={300}
+                                            required
+                                        />
                                     </div>
                                     <div className="col-md-12 mb-3">
                                         <label className='form-label'>Message Types</label>
