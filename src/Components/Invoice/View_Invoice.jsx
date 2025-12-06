@@ -65,7 +65,7 @@ const View_Invoice = () => {
               </div>
             </div>
 
-            <table className="table border mt-5">
+            <table className="table border mt-4">
               <thead>
                 <tr>
                   <th scope="col" className="table-dark">Product Name</th>
