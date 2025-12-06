@@ -145,6 +145,23 @@
     gap: 10px;
 }
 
+.message_action_btn {
+    font-size: 14px;
+    font-family: var(--primary-fonts);
+    letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    gap: 3px;
+}
+
+.customer_message_count {
+    color: gray;
+    position: absolute;
+    font-size: 12px;
+    right: 5px;
+    bottom: 5px;
+}
+
 /* Hide number input spinners in Chrome, Safari, Edge */
 input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {

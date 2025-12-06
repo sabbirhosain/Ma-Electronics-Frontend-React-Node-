@@ -31,6 +31,7 @@ import Update_Expense from "./Components/Expense/Update_Expense"
 import Protected_Route from "./Layout/Protected_Route"
 import Login_Page from "./Pages/Login_Page"
 import './App.css'
+import Send_Message from "./Components/Message/Send_Message"
 
 const App = () => {
   const { auth } = useAuth_Context()
@@ -66,6 +67,7 @@ const App = () => {
           <Route path="/expense-table" element={<Expense_Page />} />
           <Route path="/expense-create" element={<Create_Expense />} />
           <Route path="/expense-update/:id" element={<Update_Expense />} />
+          <Route path="/send-message" element={<Send_Message />} />
           <Route path="/profile-settings" element={<Settings_Page />} />
         </Route>
       </Routes>
