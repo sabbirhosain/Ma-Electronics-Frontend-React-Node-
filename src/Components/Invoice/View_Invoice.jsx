@@ -1,7 +1,8 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { single_invoice } from '../../api_base_routes';
+import { RiPrinterLine } from "react-icons/ri";
+import { MdOutlineBackspace } from "react-icons/md";
 import React, { useEffect, useState } from 'react'
-import { useReactToPrint } from "react-to-print";
 import Layout from '../../Layout/Layout'
 import { toast } from 'react-toastify';
 import axios from 'axios';
@@ -20,7 +21,6 @@ const View_Invoice = () => {
         setLoading(true)
         const response = await axios.get(`${single_invoice}${id}`);
         if (response && response.data) {
-          const result = response.data.payload;
           setInvoice(response.data.payload);
         }
       } catch (error) {
@@ -84,7 +84,11 @@ const View_Invoice = () => {
                       <td>{item.price}</td>
                     </tr>
                   ))
-                ) : <span className="text-center d-block">No Products Found</span>}
+                ) : (
+                  <tr>
+                    <td colSpan={4} className="text-center">No Products Found</td>
+                  </tr>
+                )}
               </tbody>
             </table>
 
@@ -131,8 +135,11 @@ const View_Invoice = () => {
               <p>Thank you for your business!</p>
               <p className="text-muted mb-0">This is a system-generated invoice and does not require a signature.</p>
             </div>
-
           </div>
+        </div>
+        <div className="d-flex align-items-center justify-content-end gap-3 mt-5">
+          <Link to='/invoice-table' className='btn btn-danger rounded-0 d-flex align-items-center gap-1'><MdOutlineBackspace /> Back</Link>
+          <Link to={`/invoice-print/${id}`} className='btn btn-success rounded-0 d-flex align-items-center gap-1'><RiPrinterLine /> Print Invoice</Link>
         </div>
       </section>
     </Layout>
