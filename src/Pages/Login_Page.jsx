@@ -46,7 +46,7 @@ const Login_Page = () => {
         const payload = response.data.payload;
         const encrypted = encryptData(payload);
         if (encrypted) { Cookies.set("root", encrypted, { secure: true, sameSite: "Strict" }) }
-        setAuth({ user: payload.user, access: payload.access, refresh: payload.refresh, store_name: payload.store_name });
+        setAuth({ user_id: payload.user, access: payload.access });
 
         navigate("/", { replace: true });
         toast.success(response.data.message || "Login Success.");
@@ -56,7 +56,7 @@ const Login_Page = () => {
       Cookies.remove('root');
       console.error(error.response);
       setError_message(error.response.data || { message: 'Login failed' });
-      setAuth({ user: null, access: null, refresh: null, store_name: null });
+      setAuth({ user_id: null, access: null });
 
     } finally {
       setLoading(false);

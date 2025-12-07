@@ -1,12 +1,14 @@
-import React, { createContext, useContext, useEffect, useMemo, useState } from 'react'
+import React, { createContext, useContext, useEffect, useState } from 'react'
+import { logout_users } from '../api_base_routes';
 import { jwtDecode } from 'jwt-decode';
-import Cookies from "js-cookie";
 import CryptoJS from 'crypto-js'
+import Cookies from "js-cookie";
+import axios from 'axios';
 
 const Auth_Context_Provider = createContext()
 const Auth_Context = ({ children }) => {
 
-    const [auth, setAuth] = useState({ user: null, access: null, refresh: null, store_name: null });
+    const [auth, setAuth] = useState({ user_id: null, access: null });
     const SECRET_KEY = import.meta.env.VITE_CRYPTOJS_SECRET_KEY || 'YourFallbackSecretKey';
     const [authLoading, setAuthLoading] = useState(true);
 
@@ -48,31 +50,40 @@ const Auth_Context = ({ children }) => {
     useEffect(() => {
         const token = Cookies.get('root');
         if (!token) {
-            setAuth({ user: null, access: null, refresh: null, store_name: null });
+            setAuth({ user_id: null, access: null });
             setAuthLoading(false);
             return;
         }
 
-        const data = decryptData(token);        
+        const data = decryptData(token);
         if (data && data.access && !isTokenExpired(data.access)) {
-            setAuth({ user: data.user, access: data.access, refresh: data.refresh, store_name: data.store_name });
+            setAuth({ user_id: data.user, access: data.access });
         } else {
             Cookies.remove('root');
-            setAuth({ user: null, access: null, refresh: null, store_name: null });
+            setAuth({ user_id: null, access: null });
         }
         setAuthLoading(false);
     }, []);
 
-    const logout = () => {
+    const logout_function = async () => {
         const confirm_logout = window.confirm('Are You Sure ? You Want to Logout!');
         if (!confirm_logout) return;
+        try {
+            const response = await axios.post(logout_users, {
+                access: auth.access
+            });
 
-        Cookies.remove("root");
-        setAuth({ user: null, access: null, refresh: null, store_name: null });
+            if (response && response.data && response.data.success) {
+                Cookies.remove("root");
+                setAuth({ user_id: null, access: null });
+            }
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
-        <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading, logout }}>
+        <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading, logout_function }}>
             {children}
         </Auth_Context_Provider.Provider>
     )

@@ -5,7 +5,7 @@ import { FaPowerOff } from "react-icons/fa";
 import "./Header_Sidebar_Style.css";
 import { useAuth_Context } from "../../Context/Auth_Context";
 const Header = () => {
-  const { logout } = useAuth_Context()
+  const { logout_function } = useAuth_Context()
   return (
     <div className="navbar_top">
       <div className="container-fluid pe-md-5">
@@ -17,7 +17,7 @@ const Header = () => {
           <h5 className="company_brand d-none d-md-block">Ma Electronics</h5>
           <div className="d-flex align-items-center gap-3">
             <Link to='/send-message' className="navbar_action_btn btn btn-primary rounded-0"><BiMessageDetail /> Message</Link>
-            <button className="navbar_action_btn btn btn-danger rounded-0"><FaPowerOff /> Logout</button>
+            <button onClick={logout_function} className="navbar_action_btn btn btn-danger rounded-0"><FaPowerOff /> Logout</button>
           </div>
         </div>
       </div>

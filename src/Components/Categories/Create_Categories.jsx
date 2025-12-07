@@ -56,10 +56,10 @@ const Create_Categories = () => {
               </div>
               <div className="row">
                 <div className="col-md-6 mt-3">
-                  <Link to="/categories-table" className="btn btn-dark rounded-0 w-100 custom_btn">Cancel</Link>
+                  <Link to="/categories-table" className="btn btn-danger rounded-0 w-100 custom_btn">Cancel</Link>
                 </div>
                 <div className="col-md-6 mt-3">
-                  <button type="submit" className="btn btn-dark rounded-0 w-100 custom_btn">{loading ? "Please Wait" : "Create"}</button>
+                  <button type="submit" className="btn btn-success rounded-0 w-100 custom_btn">{loading ? "Please Wait" : "Create"}</button>
                 </div>
               </div>
             </form>

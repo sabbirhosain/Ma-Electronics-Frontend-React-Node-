@@ -14,42 +14,42 @@ const Dashboard_Page = () => {
           <div className="row mt-4">
             <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.data.net_profit_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.net_profit_today || 0}</h1>
                 <h6 className='dashboard_card_title'>Net Profit</h6>
                 <span className='dashboard_card_badge'>Daily</span>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.data.total_cash_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_cash_today || 0}</h1>
                 <h6 className='dashboard_card_title'>Total Cash</h6>
                 <span className='dashboard_card_badge'>Daily</span>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.data.total_expense_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_expense_today || 0}</h1>
                 <h6 className='dashboard_card_title'>Total Expense</h6>
                 <span className='dashboard_card_badge'>Daily</span>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.data.total_products}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_products || 0}</h1>
                 <h6 className='dashboard_card_title'>Total Products</h6>
                 <span className='dashboard_card_badge'>Daily</span>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.data.total_purchase_quantity_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_purchase_quantity_today || 0}</h1>
                 <h6 className='dashboard_card_title'>Total Purchase</h6>
                 <span className='dashboard_card_badge'>Daily</span>
               </div>
             </div>
             <div className="col-sm-6 col-md-4 col-lg-4 col-xl-3 col-xxl-2 mb-4">
               <div className='dashboard_card'>
-                <h1 className='dashboard_card_count'>{dashboard.data.total_sell_today}</h1>
+                <h1 className='dashboard_card_count'>{dashboard.data.total_sell_today || 0}</h1>
                 <h6 className='dashboard_card_title'>Total Sell</h6>
                 <span className='dashboard_card_badge'>Daily</span>
               </div>
