@@ -31,7 +31,6 @@ import Update_Expense from "./Components/Expense/Update_Expense"
 import Protected_Route from "./Layout/Protected_Route"
 import Login_Page from "./Pages/Login_Page"
 import Send_Message from "./Components/Message/Send_Message"
-import Invoice_Print from "./Components/Invoice/Invoice_Print"
 import './App.css'
 
 const App = () => {
@@ -70,7 +69,6 @@ const App = () => {
           <Route path="/expense-update/:id" element={<Update_Expense />} />
           <Route path="/send-message" element={<Send_Message />} />
           <Route path="/profile-settings" element={<Settings_Page />} />
-          <Route path="/invoice-print/:id" element={<Invoice_Print />} />
         </Route>
       </Routes>
     </>

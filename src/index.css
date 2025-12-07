@@ -117,3 +117,29 @@ button {
         margin-left: 0px;
     }
 }
+
+/* Screen এ print component hide */
+.print-only {
+    display: none;
+}
+
+/* Print এ শুধু print component show */
+@media print {
+    .no-print {
+        display: none !important;
+    }
+
+    .print-only {
+        display: block !important;
+    }
+
+    body {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+}
+
+@page {
+    size: A4;
+    margin: 12mm;
+}

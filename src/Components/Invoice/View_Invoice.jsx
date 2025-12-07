@@ -1,16 +1,18 @@
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import React, { useEffect, useRef, useState } from 'react'
 import { single_invoice } from '../../api_base_routes';
-import { RiPrinterLine } from "react-icons/ri";
 import { MdOutlineBackspace } from "react-icons/md";
-import React, { useEffect, useState } from 'react'
+import { useReactToPrint } from 'react-to-print';
+import { RiPrinterLine } from "react-icons/ri";
 import Layout from '../../Layout/Layout'
 import { toast } from 'react-toastify';
-import axios from 'axios';
 import './View_Invoice.css'
+import axios from 'axios';
+import Invoice_Print from './Invoice_Print';
 
 const View_Invoice = () => {
   const { id } = useParams();
-  const navigate = useNavigate();
+  const printRef = useRef(null);
   const [loading, setLoading] = useState(false)
   const [error_message, setError_message] = useState({});
   const [invoice, setInvoice] = useState([]);
@@ -33,6 +35,10 @@ const View_Invoice = () => {
     getInvoice()
   }, [id]);
 
+  const handlePrint = useReactToPrint({
+    contentRef: printRef,
+    documentTitle: invoice.invoice_no ?? id,
+  });
 
   return (
     <Layout>
@@ -131,15 +137,49 @@ const View_Invoice = () => {
               </div>
             </div>
 
+            <table className="table border mt-5">
+              <thead>
+                <tr>
+                  <th scope="col" className="table-dark">Payment Date</th>
+                  <th scope="col" className="table-dark">Previous Due</th>
+                  <th scope="col" className="table-dark">Payable Amount</th>
+                  <th scope="col" className="table-dark">Payment Method</th>
+                  <th scope="col" className="table-dark">Current Due</th>
+                  <th scope="col" className="table-dark">Reference</th>
+                  <th scope="col" className="table-dark">Received</th>
+                </tr>
+              </thead>
+              <tbody>
+                {invoice.customer_payment_history && invoice.customer_payment_history.length > 0 ? (
+                  invoice.customer_payment_history.map((payment, index) => (
+                    <tr key={index}>
+                      <td>{payment.date_and_time_formated}</td>
+                      <td>{payment.previous_due} TK</td>
+                      <td>{payment.payable_amount} TK</td>
+                      <td>{payment.payment_method}</td>
+                      <td>{payment.current_due} Tk</td>
+                      <td>{payment.payment_reference || 'N/A'}</td>
+                      <td>{payment.received_by || 'N/A'}</td>
+                    </tr>
+                  ))
+                ) : (
+                  <tr>
+                    <td colSpan={7} className="text-center">No Payment Found</td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+
             <div className="invoice_footer_note mt-4">
               <p>Thank you for your business!</p>
               <p className="text-muted mb-0">This is a system-generated invoice and does not require a signature.</p>
             </div>
           </div>
         </div>
-        <div className="d-flex align-items-center justify-content-end gap-3 mt-5">
+        <div className="d-flex align-items-center justify-content-end gap-3 mt-5 no-print">
           <Link to='/invoice-table' className='btn btn-danger rounded-0 d-flex align-items-center gap-1'><MdOutlineBackspace /> Back</Link>
-          <Link to={`/invoice-print/${id}`} className='btn btn-success rounded-0 d-flex align-items-center gap-1'><RiPrinterLine /> Print Invoice</Link>
+          <button type='button' onClick={handlePrint} className='btn btn-success rounded-0 d-flex align-items-center gap-1' disabled={loading}><RiPrinterLine /> Print Invoice</button>
+          <div ref={printRef} className="print-only" ><Invoice_Print invoice={invoice} /></div>
         </div>
       </section>
     </Layout>
