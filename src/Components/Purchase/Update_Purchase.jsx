@@ -104,9 +104,19 @@ const Update_Purchase = () => {
                   />
                 </div>
 
-                <div className="col-md-6 mb-3">
+                <div className="col-md-4 mb-3">
                   <label className='form-label'>Quentity</label>
                   <input type="number" name="quentity" value={purchase.quentity || ''} onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                </div>
+
+                <div className="col-md-4 mb-3">
+                  <label className='form-label'>Unit Price</label>
+                  <input type="number" name="unit_price" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
+                </div>
+
+                <div className="col-md-4 mb-3">
+                  <label className='form-label'>Total Price</label>
+                  <input type="number" name="total_price" onChange={handleChange} className='form-control rounded-0' disabled={loading} readOnly />
                 </div>
 
                 <div className="col-md-6 mb-3">
@@ -114,6 +124,10 @@ const Update_Purchase = () => {
                   <input type="text" name="supplier_name" value={purchase.supplier_name || ''} onChange={handleChange} className='form-control rounded-0' disabled={loading} />
                 </div>
 
+                <div className="col-md-6 mb-3">
+                  <label className='form-label'>Challan Attachment</label>
+                  <input type="file" name="challan_attachment" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
+                </div>
               </div>
 
               <div className="row">

@@ -15,7 +15,7 @@ const Create_Purchase = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
-  const [purchase, setPurchase] = useState({ date_and_time: "", quentity: "", supplier_name: "" });
+  const [purchase, setPurchase] = useState({ date_and_time: "", quentity: "", supplier_name: "", unit_price: "", total_price: "", challan_attachment: null });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -81,14 +81,29 @@ const Create_Purchase = () => {
                   />
                 </div>
 
-                <div className="col-md-6 mb-3">
+                <div className="col-md-4 mb-3">
                   <label className='form-label'>Quentity</label>
                   <input type="number" name="quentity" onChange={handleChange} className='form-control rounded-0' disabled={loading} required />
+                </div>
+
+                <div className="col-md-4 mb-3">
+                  <label className='form-label'>Unit Price</label>
+                  <input type="number" name="unit_price" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
+                </div>
+
+                <div className="col-md-4 mb-3">
+                  <label className='form-label'>Total Price</label>
+                  <input type="number" name="total_price" onChange={handleChange} className='form-control rounded-0' disabled={loading} readOnly />
                 </div>
 
                 <div className="col-md-6 mb-3">
                   <label className='form-label'>Supplier Name</label>
                   <input type="text" name="supplier_name" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
+                </div>
+
+                <div className="col-md-6 mb-3">
+                  <label className='form-label'>Challan Attachment</label>
+                  <input type="file" name="challan_attachment" onChange={handleChange} className='form-control rounded-0' disabled={loading} />
                 </div>
 
               </div>

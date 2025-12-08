@@ -47,5 +47,5 @@ export const update_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expe
 export const delete_expense = import.meta.env.VITE_API_URL + "/api/v1/items/expense/";
 
 export const show_dashboard = import.meta.env.VITE_API_URL + "/api/v1/dashboard/today-stats";
-export const show_store_name = import.meta.env.VITE_API_URL + "/api/v1/user-stores";
-export const update_store_name = import.meta.env.VITE_API_URL + "/api/v1/user-stores";
+export const show_store_name = import.meta.env.VITE_API_URL + "/api/v1/my-store";
+export const update_store_name = import.meta.env.VITE_API_URL + "/api/v1/my-store";

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react'
-import { logout_users } from '../api_base_routes';
+import { logout_users, show_store_name } from '../api_base_routes';
 import { jwtDecode } from 'jwt-decode';
 import CryptoJS from 'crypto-js'
 import Cookies from "js-cookie";
@@ -82,8 +82,29 @@ const Auth_Context = ({ children }) => {
         }
     };
 
+    const [store_setting, setStore_Setting] = useState({ isLoading: false, data: [], error_message: null })
+    const updateStoreSettingState = (newState) => { setStore_Setting(prev => ({ ...prev, ...newState })) };
+
+    const fetchStoreSettingData = async () => {
+        try {
+            updateStoreSettingState({ isLoading: true, error_message: null });
+            const response = await axios.get(show_store_name);
+
+            if (response && response.data) {
+                const data = response.data.payload || [];
+                updateStoreSettingState({ data: data });
+            }
+
+        } catch (error) {
+            console.log(error);
+        } finally {
+            updateStoreSettingState({ isLoading: false });
+        }
+    }
+
+
     return (
-        <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading, logout_function }}>
+        <Auth_Context_Provider.Provider value={{ encryptData, decryptData, auth, isTokenExpired, setAuth, authLoading, logout_function, store_setting, fetchStoreSettingData }}>
             {children}
         </Auth_Context_Provider.Provider>
     )

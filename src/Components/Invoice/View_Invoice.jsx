@@ -4,6 +4,7 @@ import { single_invoice } from '../../api_base_routes';
 import { MdOutlineBackspace } from "react-icons/md";
 import { useReactToPrint } from 'react-to-print';
 import { RiPrinterLine } from "react-icons/ri";
+import { BiMessageDetail } from "react-icons/bi";
 import Layout from '../../Layout/Layout'
 import { toast } from 'react-toastify';
 import './View_Invoice.css'
@@ -70,34 +71,34 @@ const View_Invoice = () => {
                 <span className='d-block'>Customer Address : {invoice.customer_address}</span>
               </div>
             </div>
-
-            <table className="table border mt-4">
-              <thead>
-                <tr>
-                  <th scope="col" className="table-dark">Product Name</th>
-                  <th scope="col" className="table-dark">Quentity</th>
-                  <th scope="col" className="table-dark">Unit Price</th>
-                  <th scope="col" className="table-dark">Price</th>
-                </tr>
-              </thead>
-              <tbody>
-                {invoice.products && invoice.products.length > 0 ? (
-                  invoice.products.map((item, index) => (
-                    <tr key={index}>
-                      <td>{item.product_name}</td>
-                      <td>{item.quentity + ' - ' + item.unit_type}</td>
-                      <td>{item.unit_price}</td>
-                      <td>{item.price}</td>
-                    </tr>
-                  ))
-                ) : (
+            <div className='table-responsive mt-4'>
+              <table className="table table-bordered">
+                <thead>
                   <tr>
-                    <td colSpan={4} className="text-center">No Products Found</td>
+                    <th scope="col" className="table-dark">Product Name</th>
+                    <th scope="col" className="table-dark">Quentity</th>
+                    <th scope="col" className="table-dark">Unit Price</th>
+                    <th scope="col" className="table-dark">Price</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
-
+                </thead>
+                <tbody>
+                  {invoice.products && invoice.products.length > 0 ? (
+                    invoice.products.map((item, index) => (
+                      <tr key={index}>
+                        <td>{item.product_name}</td>
+                        <td>{item.quentity + ' - ' + item.unit_type}</td>
+                        <td>{item.unit_price}</td>
+                        <td>{item.price}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={4} className="text-center">No Products Found</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
             <div className="row justify-content-end">
               <div className="col-md-4">
                 <ol className="list-group rounded-0">
@@ -137,38 +138,40 @@ const View_Invoice = () => {
               </div>
             </div>
 
-            <table className="table border mt-5">
-              <thead>
-                <tr>
-                  <th scope="col" className="table-dark">Payment Date</th>
-                  <th scope="col" className="table-dark">Previous Due</th>
-                  <th scope="col" className="table-dark">Payable Amount</th>
-                  <th scope="col" className="table-dark">Payment Method</th>
-                  <th scope="col" className="table-dark">Current Due</th>
-                  <th scope="col" className="table-dark">Reference</th>
-                  <th scope="col" className="table-dark">Received</th>
-                </tr>
-              </thead>
-              <tbody>
-                {invoice.customer_payment_history && invoice.customer_payment_history.length > 0 ? (
-                  invoice.customer_payment_history.map((payment, index) => (
-                    <tr key={index}>
-                      <td>{payment.date_and_time_formated}</td>
-                      <td>{payment.previous_due} TK</td>
-                      <td>{payment.payable_amount} TK</td>
-                      <td>{payment.payment_method}</td>
-                      <td>{payment.current_due} Tk</td>
-                      <td>{payment.payment_reference || 'N/A'}</td>
-                      <td>{payment.received_by || 'N/A'}</td>
-                    </tr>
-                  ))
-                ) : (
+            <div className='table-responsive mt-5'>
+              <table className="table table-bordered">
+                <thead>
                   <tr>
-                    <td colSpan={7} className="text-center">No Payment Found</td>
+                    <th scope="col" className="table-dark">Payment Date</th>
+                    <th scope="col" className="table-dark">Previous Due</th>
+                    <th scope="col" className="table-dark">Payable Amount</th>
+                    <th scope="col" className="table-dark">Payment Method</th>
+                    <th scope="col" className="table-dark">Current Due</th>
+                    <th scope="col" className="table-dark">Reference</th>
+                    <th scope="col" className="table-dark">Received</th>
                   </tr>
-                )}
-              </tbody>
-            </table>
+                </thead>
+                <tbody>
+                  {invoice.customer_payment_history && invoice.customer_payment_history.length > 0 ? (
+                    invoice.customer_payment_history.map((payment, index) => (
+                      <tr key={index}>
+                        <td>{payment.date_and_time_formated}</td>
+                        <td>{payment.previous_due} TK</td>
+                        <td>{payment.payable_amount} TK</td>
+                        <td>{payment.payment_method}</td>
+                        <td>{payment.current_due} Tk</td>
+                        <td>{payment.payment_reference || 'N/A'}</td>
+                        <td>{payment.received_by || 'N/A'}</td>
+                      </tr>
+                    ))
+                  ) : (
+                    <tr>
+                      <td colSpan={7} className="text-center">No Payment Found</td>
+                    </tr>
+                  )}
+                </tbody>
+              </table>
+            </div>
 
             <div className="invoice_footer_note mt-4">
               <p>Thank you for your business!</p>
@@ -178,6 +181,7 @@ const View_Invoice = () => {
         </div>
         <div className="d-flex align-items-center justify-content-end gap-3 mt-5 no-print">
           <Link to='/invoice-table' className='btn btn-danger rounded-0 d-flex align-items-center gap-1'><MdOutlineBackspace /> Back</Link>
+          <button type='button' className='btn btn-warning rounded-0 d-flex align-items-center gap-1'><BiMessageDetail /> Send Message</button>
           <button type='button' onClick={handlePrint} className='btn btn-success rounded-0 d-flex align-items-center gap-1' disabled={loading}><RiPrinterLine /> Print Invoice</button>
           <div ref={printRef} className="print-only" ><Invoice_Print invoice={invoice} /></div>
         </div>
