@@ -14,7 +14,7 @@ const Update_Invoice = () => {
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
   const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context()
-  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", currency_type: "", discount: "", discount_type: "", tax: "", grand_total: "", advance_pay: "", payment_type: "", payment_method: "", current_due: "" });
+  const [invoice, setInvoice] = useState({ date_and_time: "", customer_name: "", customer_phone: "", customer_address: "", total_price: "", currency_type: "", discount: "", discount_type: "", tax: "", grand_total: "", advance_pay: "", payment_method: "", current_due: "" });
 
   const handleChange = (event) => {
     const { name, value, files, type } = event.target;
@@ -54,7 +54,7 @@ const Update_Invoice = () => {
         if (response && response.data) {
           const result = response.data.payload;
 
-          setInvoice({ date_and_time: result.date_and_time, customer_name: result.customer_name, customer_phone: result.customer_phone, customer_address: result.customer_address, total_price: result.subtotal, currency_type: result.currency_type, payment_type: result.payment_type, payment_method: result.payment_method, discount: result.discount, discount_type: result.discount_type, current_due: result.current_due, advance_pay: result.advance_pay, grand_total: result.grand_total, tax: result.tax });
+          setInvoice({ date_and_time: result.date_and_time, customer_name: result.customer_name, customer_phone: result.customer_phone, customer_address: result.customer_address, total_price: result.subtotal, currency_type: result.currency_type, payment_method: result.payment_method, discount: result.discount, discount_type: result.discount_type, current_due: result.current_due, advance_pay: result.advance_pay, grand_total: result.grand_total, tax: result.tax });
 
           setInvoice_Products(
             result.products.map(item => ({
@@ -95,7 +95,6 @@ const Update_Invoice = () => {
         customer_address: invoice.customer_address,
         discount: invoice.discount,
         tax: invoice.tax,
-        payment_type: invoice.payment_type,
         discount_type: invoice.discount_type,
         advance_pay: invoice.advance_pay,
         payment_method: invoice.payment_method,
@@ -193,18 +192,6 @@ const Update_Invoice = () => {
                   <div className="row align-items-center mb-2">
                     <div className="col-md-6 col-12"><label className="form-label d-block text-md-end">Advance Pay :</label></div>
                     <div className="col-md-6 col-12"><input type="number" name='advance_pay' value={invoice.advance_pay || ""} onChange={handleChange} min='0' className="form-control rounded-0" disabled={loading} /></div>
-                  </div>
-
-                  <div className="row align-items-center mb-2">
-                    <div className="col-md-6 col-12"><label className='form-label d-block text-md-end'>Payment Types :</label></div>
-                    <div className="col-md-6 col-12">
-                      <select className="form-select rounded-0" name='payment_type' value={invoice.payment_type || ""} onChange={handleChange} disabled={loading}>
-                        <option value=''>Select Type</option>
-                        <option value='partial_payment'>Partial Payment</option>
-                        <option value='loan_payment'>Loan Payment</option>
-                        <option value='full_payment'>Full Payment</option>
-                      </select>
-                    </div>
                   </div>
 
                   <div className="row align-items-center mb-2">

@@ -19,7 +19,7 @@ const Header = () => {
 
           <h5 className="company_brand d-none d-md-block">{store_setting.data.name || 'Inventory System'}</h5>
           <div className="d-flex align-items-center gap-3">
-            <Link to='/send-message' className="navbar_action_btn btn btn-primary rounded-0"><BsSubstack /> Subscription</Link>
+            <Link to='/subscription-package' className="navbar_action_btn btn btn-primary rounded-0"><BsSubstack /> Subscription</Link>
             <button onClick={logout_function} className="navbar_action_btn btn btn-danger rounded-0"><FaPowerOff /> Logout</button>
           </div>
         </div>

@@ -30,6 +30,7 @@ import Create_Expense from "./Components/Expense/Create_Expense"
 import Update_Expense from "./Components/Expense/Update_Expense"
 import Protected_Route from "./Layout/Protected_Route"
 import Login_Page from "./Pages/Login_Page"
+import Subscription_Page from "./Pages/Subscription_Page"
 import Send_Message from "./Components/Message/Send_Message"
 import './App.css'
 
@@ -67,6 +68,8 @@ const App = () => {
           <Route path="/expense-table" element={<Expense_Page />} />
           <Route path="/expense-create" element={<Create_Expense />} />
           <Route path="/expense-update/:id" element={<Update_Expense />} />
+          <Route path="/expense-update/:id" element={<Update_Expense />} />
+          <Route path="/subscription-package" element={<Subscription_Page />} />
           <Route path="/send-message" element={<Send_Message />} />
           <Route path="/profile-settings" element={<Settings_Page />} />
         </Route>
