@@ -14,7 +14,7 @@ const Create_Invoice = () => {
   const [loading, setLoading] = useState(false);
   const [error_message, setError_message] = useState({});
   const { invoice_products, setInvoice_Products, setDisabledProducts } = useInvoice_Context()
-  const [invoice, setInvoice] = useState({ date_and_time: new Date().toISOString().slice(0, 10), customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", current_due: "", is_loan: false });
+  const [invoice, setInvoice] = useState({ date_and_time: new Date().toISOString().slice(0, 10), customer_name: "", customer_phone: "", customer_address: "", total_price: "", discount: "", discount_type: "", tax: "", sub_total: "", advance_pay: "", payment_method: "", current_due: "", is_loan: false, installment_type: "", installment_count: "", interest_rate: "", note: "" });
   const resetFields = () => { setInvoice_Products([]); setDisabledProducts([]) };
 
   const handleChange = (event) => {
@@ -63,12 +63,19 @@ const Create_Invoice = () => {
         discount_type: invoice.discount_type,
         advance_pay: invoice.advance_pay,
         payment_method: invoice.payment_method,
+        is_loan: invoice.is_loan,
         products: invoice_products.map(item => ({
           product_id: item.product.value,
           unit_price: Number(item.unit_price),
           quentity: Number(item.quentity),
           unit_type: item.unit_type
-        }))
+        })),
+        loan: {
+          installment_type: invoice.installment_type,
+          installment_count: invoice.installment_count,
+          interest_rate: invoice.interest_rate,
+          note: invoice.note
+        }
       });
 
       if (response && response.data && response.data.success) {
@@ -77,6 +84,7 @@ const Create_Invoice = () => {
         setDisabledProducts([]);
         toast.success(response.data.message || "Create Success.");
       } else {
+        console.log(response.data);
         alert(response.data.message || "Field Error");
       }
     } catch (error) {
@@ -126,12 +134,11 @@ const Create_Invoice = () => {
               </div>
 
               <div className={`row ${invoice.is_loan ? 'justify-content-between' : 'justify-content-end'} border py-3`}>
-
                 <div className={`col-md-4 border-end ${invoice.is_loan ? 'd-block' : 'd-none'}`}>
                   <div className="row align-items-center mb-2">
                     <div className='col-md-5 col-12'><label className='form-label d-block text-md-end'>Installment Type :</label></div>
                     <div className='col-md-7 col-12'>
-                      <select className="form-select rounded-0" name='' onChange={handleChange} disabled={loading}>
+                      <select className="form-select rounded-0" name='installment_type' onChange={handleChange} disabled={loading} required={invoice.is_loan}>
                         <option value=''>Select Type</option>
                         <option value='daily'>Daily</option>
                         <option value='weekly'>Weekly</option>
@@ -142,26 +149,26 @@ const Create_Invoice = () => {
 
                   <div className="row align-items-center mb-2">
                     <div className="col-md-5 col-12"><label className="form-label d-block text-md-end">Installment Count :</label></div>
-                    <div className="col-md-7 col-6"><input type="text" className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-7 col-6"><input type="number" name='installment_count' onChange={handleChange} className="form-control rounded-0" disabled={loading} required={invoice.is_loan} /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-md-5 col-12"><label className="form-label d-block text-md-end">Interest Rrate :</label></div>
-                    <div className="col-md-7 col-6"><input type="text" className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-7 col-6"><input type="number" name='interest_rate' onChange={handleChange} className="form-control rounded-0" disabled={loading} required={invoice.is_loan} /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-md-5 col-12"><label className="form-label d-block text-md-end">Interest Amount :</label></div>
-                    <div className="col-md-7 col-6"><input type="text" className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-7 col-6"><input type="number" className="form-control rounded-0" disabled={loading} readOnly /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
                     <div className="col-md-5 col-12"><label className="form-label d-block text-md-end">Total Payable :</label></div>
-                    <div className="col-md-7 col-6"><input type="text" className="form-control rounded-0" readOnly disabled={loading} /></div>
+                    <div className="col-md-7 col-6"><input type="number" className="form-control rounded-0 bg-danger text-white" disabled={loading} readOnly /></div>
                   </div>
 
                   <div className="row align-items-center mb-2">
-                    <div className="col-md-12 col-6"><textarea name="" rows='2' className='form-control rounded-0' placeholder='Message Hear...'></textarea></div>
+                    <div className="col-md-12 col-6"><textarea name="note" onChange={handleChange} rows='2' className='form-control rounded-0' placeholder='Message Hear...'></textarea></div>
                   </div>
                 </div>
 

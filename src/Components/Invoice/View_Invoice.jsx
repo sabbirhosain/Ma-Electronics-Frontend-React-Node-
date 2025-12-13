@@ -99,7 +99,43 @@ const View_Invoice = () => {
                 </tbody>
               </table>
             </div>
-            <div className="row justify-content-end">
+            {/* <div className="row justify-content-between">
+              <div className="col-md-4">
+                <ol className="list-group rounded-0">
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Installment Type</span>
+                    <span>{invoice.loan}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Discount</span>
+                    <span>{invoice.discount} {invoice.discount_type === 'amount' ? 'Tk' : '%'}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Tax</span>
+                    <span>{invoice.tax} Tk</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Grand Total</span>
+                    <span>{invoice.grand_total}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Advance Pay</span>
+                    <span>{invoice.advance_pay}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Payment Type</span>
+                    <span>{invoice.payment_type}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center">
+                    <span>Payment Method</span>
+                    <span>{invoice.payment_method}</span>
+                  </li>
+                  <li className="list-group-item d-flex justify-content-between align-items-center bg-danger text-white">
+                    <span>Current Due</span>
+                    <span>{invoice.current_due}</span>
+                  </li>
+                </ol>
+              </div>
               <div className="col-md-4">
                 <ol className="list-group rounded-0">
                   <li className="list-group-item d-flex justify-content-between align-items-center">
@@ -136,7 +172,7 @@ const View_Invoice = () => {
                   </li>
                 </ol>
               </div>
-            </div>
+            </div> */}
 
             <div className='table-responsive mt-5'>
               <table className="table table-bordered">
